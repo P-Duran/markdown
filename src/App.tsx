@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Grid } from "@mui/material";
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
+import "./App.css";
+import { MarkdownEditor } from "./components/editor/MarkdownEditor";
+import { MarkdownToolBar } from "./components/editor/toolbar/MarkdownToolBar";
+import { editorActions } from "./utils/EditorUtils";
 
 function App() {
+  const [text, setText] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item sm={6}>
+        <MarkdownEditor
+          onTextChange={setText}
+          toolbar={<MarkdownToolBar editorActions={editorActions} />}
+        />
+      </Grid>
+      <Grid item sm={6}>
+        <ReactMarkdown
+          children={text}
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeHighlight]}
+        />
+      </Grid>
+    </Grid>
   );
 }
 
