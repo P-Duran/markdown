@@ -3,6 +3,7 @@ import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { useState } from "react";
 import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
+import { customCompositeDecorator } from "./decorators/CustomCompositeDecorator";
 
 interface Props {
   toolbar?: React.ReactNode;
@@ -13,7 +14,7 @@ export const MarkdownEditor = ({ toolbar, onTextChange = () => {} }: Props) => {
   const [ref, setRef] = useState<Editor | null>();
 
   const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
+    EditorState.createEmpty(customCompositeDecorator)
   );
 
   return (
