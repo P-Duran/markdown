@@ -15,6 +15,10 @@ export const defaultDecorators: CustomDecorator[] = [
   { regex: /!\[(.*?)\]\((.*?)\)/g, style: { color: "#5da85c" } }, //image
   { regex: /\[(.*?)\]\((.*?)\)/g, style: { color: "#257cd3" } }, //link
   {
+    regex: /```(.*?)/g,
+    style: { backgroundColor: "#e6e6e6", color: "#4d4d4d" },
+  }, //block code
+  {
     regex: /`(.+?)`/g,
     style: { backgroundColor: "#e6e6e6", color: "#4d4d4d" },
   }, //inline code

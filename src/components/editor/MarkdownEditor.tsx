@@ -4,18 +4,19 @@ import "draft-js/dist/Draft.css";
 import { useState } from "react";
 import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
 import { CustomDecorator } from "src/types/EditorTypes";
+import { replaceSelectedText } from "src/utils/EditorUtils";
 import { customCompositeDecorator } from "./decorators/CustomCompositeDecorator";
 
 interface Props {
   toolbar?: React.ReactNode;
-  onTextChange?: (text: string) => void;
+  onChange?: (editorState: EditorState) => void;
   decorators?: CustomDecorator[];
 }
 
 export const MarkdownEditor = ({
   toolbar,
   decorators,
-  onTextChange = () => {},
+  onChange = () => {},
 }: Props) => {
   const [ref, setRef] = useState<Editor | null>();
 
@@ -44,9 +45,13 @@ export const MarkdownEditor = ({
       >
         <Editor
           editorState={editorState}
+          onTab={(e) => {
+            e.preventDefault();
+            setEditorState(replaceSelectedText(editorState, (_) => "    "));
+          }}
           onChange={(state) => {
             setEditorState(state);
-            onTextChange(state.getCurrentContent().getPlainText());
+            onChange(state);
           }}
           ref={(draftEditor) => setRef(draftEditor)}
         />
