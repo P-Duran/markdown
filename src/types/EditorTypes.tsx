@@ -16,3 +16,8 @@ export interface ActionOption {
   type: "intput";
   action: (algo: string, editorState: EditorState) => EditorState;
 }
+
+export interface CustomDecorator {
+  regex: RegExp;
+  style?: React.CSSProperties;
+}

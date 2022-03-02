@@ -1,5 +1,32 @@
 import { CompositeDecorator, DraftDecorator } from "draft-js";
+import { CustomDecorator } from "src/types/EditorTypes";
 
+export const customCompositeDecorator = (decorators: CustomDecorator[]) =>
+  new CompositeDecorator(
+    decorators.map((decorator) =>
+      customDraftDecorator(decorator.regex, ({ children }) => (
+        <span style={decorator.style}>{children}</span>
+      ))
+    )
+  );
+
+export const defaultDecorators: CustomDecorator[] = [
+  { regex: /^#{1,6} (.+)/g, style: { color: "#e4574b", fontWeight: "bold" } }, //Headers
+  { regex: /!\[(.*?)\]\((.*?)\)/g, style: { color: "#5da85c" } }, //image
+  { regex: /\[(.*?)\]\((.*?)\)/g, style: { color: "#257cd3" } }, //link
+  {
+    regex: /`(.+?)`/g,
+    style: { backgroundColor: "#e6e6e6", color: "#4d4d4d" },
+  }, //inline code
+  { regex: /\*\*(.*?)\*\*/g, style: { fontWeight: "bold" } }, //bold
+  { regex: /\*(.*?)\*/g, style: { fontStyle: "italic", color: "#a0a1a7" } }, //italic
+  {
+    regex: /~~(.*?)~~/g,
+    style: { color: "#986801", textDecoration: "line-through" },
+  }, //strightlight
+];
+
+//HELPERS
 export const regexStrategy = (
   regex: RegExp,
   block: Draft.ContentBlock,
@@ -27,27 +54,3 @@ const customDraftDecorator = (
     component: component,
   };
 };
-
-export const customCompositeDecorator = new CompositeDecorator([
-  customDraftDecorator(/^#{1,6} (.+)/g, ({ children }) => (
-    <span style={{ color: "red", fontWeight: "bold" }}>{children}</span>
-  )),
-  customDraftDecorator(/!\[(.*?)\]\((.*?)\)/g, ({ children }) => (
-    <span style={{ color: "purple" }}>{children}</span>
-  )),
-  customDraftDecorator(/\[(.*?)\]\((.*?)\)/g, ({ children }) => (
-    <span style={{ color: "blue" }}>{children}</span>
-  )),
-  customDraftDecorator(/`(.+?)`/g, ({ children }) => (
-    <span style={{ backgroundColor: "#e6e6e6" }}>{children}</span>
-  )),
-  customDraftDecorator(/\*\*(.+?)\*\*/g, ({ children }) => (
-    <span style={{ fontWeight: "bold" }}>{children}</span>
-  )),
-  customDraftDecorator(/\*(.+?)\*/g, ({ children }) => (
-    <span style={{ color: "gray" }}>{children}</span>
-  )),
-  customDraftDecorator(/~~(.+?)~~/g, ({ children }) => (
-    <span style={{ color: "orange" }}>{children}</span>
-  )),
-]);

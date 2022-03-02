@@ -3,18 +3,26 @@ import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { useState } from "react";
 import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
+import { CustomDecorator } from "src/types/EditorTypes";
 import { customCompositeDecorator } from "./decorators/CustomCompositeDecorator";
 
 interface Props {
   toolbar?: React.ReactNode;
   onTextChange?: (text: string) => void;
+  decorators?: CustomDecorator[];
 }
 
-export const MarkdownEditor = ({ toolbar, onTextChange = () => {} }: Props) => {
+export const MarkdownEditor = ({
+  toolbar,
+  decorators,
+  onTextChange = () => {},
+}: Props) => {
   const [ref, setRef] = useState<Editor | null>();
 
   const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(customCompositeDecorator)
+    EditorState.createEmpty(
+      decorators ? customCompositeDecorator(decorators) : undefined
+    )
   );
 
   return (
@@ -30,7 +38,8 @@ export const MarkdownEditor = ({ toolbar, onTextChange = () => {} }: Props) => {
           minHeight: 300,
           paddingBottom: 10,
           paddingTop: 20,
-          fontFamily: "monospace",
+          fontFamily:
+            "'source-code-pro', 'Menlo', 'Monaco', 'Consolas', 'Courier New', 'monospace'",
         }}
       >
         <Editor
