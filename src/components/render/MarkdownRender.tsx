@@ -6,6 +6,8 @@ import { CodeBlockRender } from "./components/CodeBlockRender";
 import { ImageComponent } from "./components/ImageComponent";
 import LinearProgress from "@mui/material/LinearProgress";
 import { TableComponent } from "./components/TableComponent";
+import { HeaderComponent } from "./components/HeaderComponent";
+import { DividerComponent } from "./components/DividerComponent";
 
 interface Props {
   value: string;
@@ -44,7 +46,7 @@ export const MarkdownRender = ({ value }: Props) => {
             justifyContent: "center",
           }}
         >
-          <CircularProgress style={{color: "#283039"}}/>
+          <CircularProgress style={{ color: "#283039" }} />
         </Box>
       ) : (
         <ReactMarkdown
@@ -54,6 +56,13 @@ export const MarkdownRender = ({ value }: Props) => {
             code: CodeBlockRender,
             img: ImageComponent,
             table: TableComponent,
+            h1: HeaderComponent,
+            h2: HeaderComponent,
+            h3: HeaderComponent,
+            h4: HeaderComponent,
+            h5: HeaderComponent,
+            h6: HeaderComponent,
+            hr: DividerComponent,
           }}
         />
       )}

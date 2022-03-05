@@ -1,6 +1,32 @@
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
+  typography: {
+    h1: {
+      fontSize: "2em",
+      fontWeight: 600,
+    },
+    h2: {
+      fontSize: "1.5em",
+      fontWeight: 600,
+    },
+    h3: {
+      fontSize: "1.25em",
+      fontWeight: 600,
+    },
+    h4: {
+      fontSize: "1em",
+      fontWeight: 600,
+    },
+    h5: {
+      fontSize: ".875em",
+      fontWeight: 600,
+    },
+    h6: {
+      fontSize: ".85em",
+      fontWeight: 600,
+    },
+  },
   editor: {
     style: {
       display: "flex",
