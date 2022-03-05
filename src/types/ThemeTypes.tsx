@@ -1,7 +1,8 @@
 import { CustomDecorator } from "./EditorTypes";
 
 export type SyntaxComponent =
-  | "header"
+  | "header1"
+  | "headers"
   | "image"
   | "link"
   | "code"

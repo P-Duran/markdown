@@ -20,9 +20,13 @@ export const theme = createTheme({
       },
     },
     syntaxHighlight: {
-      header: {
+      header1: {
         regex: /^# (.+)/g,
         style: { color: "#f7fbfb", fontWeight: "bold", fontSize: 20 },
+      },
+      headers: {
+        regex: /^#{2,6} (.+)/g,
+        style: { color: "#f7fbfb", fontWeight: "bold", fontSize: 17 },
       },
       image: { regex: /!\[(.*?)\]\((.*?)\)/g, style: { color: "#47ffc2" } },
       link: { regex: /\[(.*?)\]\((.*?)\)/g, style: { color: "#4dcfff" } },
@@ -32,7 +36,11 @@ export const theme = createTheme({
       },
       inline: {
         regex: /`(.+?)`/g,
-        style: { backgroundColor: "#d9d9d9", color: "#4d4d4d" },
+        style: {
+          backgroundColor: "#d9d9d9",
+          color: "#e96900",
+          fontSize: "85%",
+        },
       },
       bold: {
         regex: /\*\*(.*?)\*\*/g,
