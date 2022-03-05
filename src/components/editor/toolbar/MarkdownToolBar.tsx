@@ -1,4 +1,4 @@
-import { Divider, Grid, Stack } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import React from "react";
 import { EditorAction } from "src/types/EditorTypes";
 import { EditorActionButton } from "./EditorActionButton";

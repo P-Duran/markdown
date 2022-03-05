@@ -44,7 +44,7 @@ export const editorActions: Record<string, EditorAction[]> = {
       actions: (editorState) =>
         replaceSelectedText(
           editorState,
-          (selectedText) => "*" + selectedText + "*"
+          (selectedText) => "*" + selectedText.trim() + "*"
         ),
     },
     {
@@ -53,7 +53,7 @@ export const editorActions: Record<string, EditorAction[]> = {
       actions: (editorState) =>
         replaceSelectedText(
           editorState,
-          (selectedText) => "**" + selectedText + "**"
+          (selectedText) => "**" + selectedText.trim() + "**"
         ),
     },
     {
@@ -62,7 +62,7 @@ export const editorActions: Record<string, EditorAction[]> = {
       actions: (editorState) =>
         replaceSelectedText(
           editorState,
-          (selectedText) => "~~" + selectedText + "~~"
+          (selectedText) => "~~" + selectedText.trim() + "~~"
         ),
     },
   ],
@@ -128,7 +128,7 @@ export const editorActions: Record<string, EditorAction[]> = {
       actions: (editorState) =>
         replaceSelectedText(
           editorState,
-          (selectedText) => "\n```\n\n" + selectedText + "\n\n```"
+          (selectedText) => "\n```\n\n" + selectedText.trim() + "\n\n```"
         ),
     },
     {

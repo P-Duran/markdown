@@ -32,7 +32,6 @@ export const Editable = ({ onChange = () => {} }: Props) => {
           setEditorState(replaceSelectedText(editorState, (_) => "    "));
         }}
         onChange={(state) => {
-          console.log("state");
           setEditorState(state);
         }}
         ref={(draftEditor) => setEditorRef(draftEditor)}
