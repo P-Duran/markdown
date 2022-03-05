@@ -7,18 +7,19 @@ import { replaceSelectedText } from "src/utils/EditorUtils";
 
 interface Props {
   onChange?: (editorState: EditorState) => void;
+  delay?: number;
 }
 
-export const Editable = ({ onChange = () => {} }: Props) => {
+export const Editable = ({ delay = 500, onChange = () => {} }: Props) => {
   const { editorState, setEditorState, editorRef, setEditorRef } =
     useMarkdownEditor();
 
   const theme = useTheme();
 
   useEffect(() => {
-    const timeOutId = setTimeout(() => onChange(editorState), 500);
+    const timeOutId = setTimeout(() => onChange(editorState), delay);
     return () => clearTimeout(timeOutId);
-  }, [editorState, onChange]);
+  }, [editorState, onChange, delay]);
 
   return (
     <Container
