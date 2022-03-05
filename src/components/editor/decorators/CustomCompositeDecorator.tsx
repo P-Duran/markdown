@@ -10,26 +10,6 @@ export const customCompositeDecorator = (decorators: CustomDecorator[]) =>
     )
   );
 
-export const defaultDecorators: CustomDecorator[] = [
-  { regex: /^#{1,6} (.+)/g, style: { color: "#e4574b", fontWeight: "bold" } }, //Headers
-  { regex: /!\[(.*?)\]\((.*?)\)/g, style: { color: "#5da85c" } }, //image
-  { regex: /\[(.*?)\]\((.*?)\)/g, style: { color: "#257cd3" } }, //link
-  {
-    regex: /```(.*?)/g,
-    style: { backgroundColor: "#e6e6e6", color: "#4d4d4d" },
-  }, //block code
-  {
-    regex: /`(.+?)`/g,
-    style: { backgroundColor: "#e6e6e6", color: "#4d4d4d" },
-  }, //inline code
-  { regex: /\*\*(.*?)\*\*/g, style: { fontWeight: "bold" } }, //bold
-  { regex: /\*(.*?)\*/g, style: { fontStyle: "italic", color: "#a0a1a7" } }, //italic
-  {
-    regex: /~~(.*?)~~/g,
-    style: { color: "#986801", textDecoration: "line-through" },
-  }, //strightlight
-];
-
 //HELPERS
 export const regexStrategy = (
   regex: RegExp,

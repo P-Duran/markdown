@@ -24,7 +24,7 @@ export const EditorActionButton = ({ icon, actions, label }: Props) => {
               ? setAnchorEl(e.currentTarget)
               : setEditorState(actions(editorState))
           }
-          style={{ borderRadius: 0 }}
+          sx={{ borderRadius: 0, color: "#d5d7e0" }}
         >
           {icon}
         </IconButton>

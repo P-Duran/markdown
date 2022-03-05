@@ -35,7 +35,7 @@ export const CodeBlockRender = ({
           borderRadius: 10,
           textAlign: "start",
           display: "inline-block",
-          minWidth: 400,
+          minWidth: "40%",
           maxWidth: "100%",
         }}
       >
