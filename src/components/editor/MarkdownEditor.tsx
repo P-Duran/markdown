@@ -6,10 +6,9 @@ import { Editor, EditorState } from "draft-js";
 import { useTheme } from "@mui/material";
 interface Props {
   children: React.ReactNode;
-  decorators?: CustomDecorator[];
 }
 
-export const MarkdownEditor = ({ children, decorators }: Props) => {
+export const MarkdownEditor = ({ children }: Props) => {
   const theme = useTheme();
 
   const [editorRef, setEditorRef] = useState<Editor | null>(null);

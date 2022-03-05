@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CodeBlockRender } from "./components/CodeBlockRender";
 import { ImageComponent } from "./components/ImageComponent";
-import LinearProgress from "@mui/material/LinearProgress";
 import { TableComponent } from "./components/TableComponent";
 import { HeaderComponent } from "./components/HeaderComponent";
 import { DividerComponent } from "./components/DividerComponent";

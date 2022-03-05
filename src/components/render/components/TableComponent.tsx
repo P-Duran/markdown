@@ -9,9 +9,8 @@ import {
 } from "@mui/material";
 
 export const TableComponent = (props: any) => {
-  console.log(props);
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{margin: "15px 0"}}>
       <Table>
         <TableHead>
           {props.children[0].props.children.map((row: any) => (
