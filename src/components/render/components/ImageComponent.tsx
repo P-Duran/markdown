@@ -19,10 +19,10 @@ export const ImageComponent = (props: Props) => {
         {...props}
         style={{
           maxWidth: "100%",
-          boxShadow: "0 5px 28px rgba(0, 0, 0, 0.4)",
+          boxShadow: "0 5px 28px rgba(0, 0, 0, 0.3)",
           borderRadius: 10,
-          marginTop: 40,
-          marginBottom: 40,
+          marginTop: 20,
+          marginBottom: 20,
         }}
       />
     </div>

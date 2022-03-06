@@ -30,7 +30,12 @@ export const MarkdownRender = ({ value }: Props) => {
   }, [value]);
 
   return (
-    <Container maxWidth="md">
+    <Container
+      maxWidth="md"
+      style={{
+        color: "#24292e",
+      }}
+    >
       {isLoading ? (
         <Box
           sx={{

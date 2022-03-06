@@ -2,6 +2,8 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
   typography: {
+    fontFamily:
+      "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
     h1: {
       fontSize: "2em",
       fontWeight: 600,
@@ -25,6 +27,10 @@ export const theme = createTheme({
     h6: {
       fontSize: ".85em",
       fontWeight: 600,
+    },
+    body1: {
+      fontSize: "16px",
+      color: "#24292e",
     },
   },
   editor: {
