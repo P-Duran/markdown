@@ -44,7 +44,7 @@ export const NavBar = (): ReactElement => {
   return (
     <>
       <AppBar position="sticky" sx={{ backgroundColor: colors.darkPurple }}>
-        <Container maxWidth="xl">
+        <Container maxWidth={false}>
           <Toolbar disableGutters>
             <IconButton
               size="large"
