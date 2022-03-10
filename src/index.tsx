@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { SnackbarProvider } from "notistack";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme/theme";
 
 ReactDOM.render(
   <React.StrictMode>
-    <meta charSet="utf-8" />
-    <SnackbarProvider maxSnack={3}>
-      <App />
-    </SnackbarProvider>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider maxSnack={3}>
+        <App />
+      </SnackbarProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

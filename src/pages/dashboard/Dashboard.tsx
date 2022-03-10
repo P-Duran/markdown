@@ -10,7 +10,6 @@ export const Dashboard = (): ReactElement => {
 
   return (
     <div>
-      Home Page
       <button onClick={onEditorNavigate}>Editor</button>
     </div>
   );

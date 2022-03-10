@@ -1,4 +1,4 @@
-import { Divider, Stack } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import React from "react";
 import { EditorAction } from "src/types/EditorTypes";
 import { EditorActionButton } from "./EditorActionButton";
@@ -10,24 +10,35 @@ interface Props {
 export const MarkdownToolBar = ({ editorActions }: Props) => {
   return (
     <>
-      <Stack direction="row" style={{ paddingLeft: 10, paddingRight: 10 }}>
+      <Grid
+        container
+        direction="row"
+        style={{ paddingLeft: 10, paddingRight: 10 }}
+      >
         {Object.entries(editorActions).map(([key, value], i) => (
           <React.Fragment key={key}>
-            {value.map((editorAction, j) => (
-              <EditorActionButton
-                key={editorAction.label + key}
-                label={editorAction.label}
-                icon={editorAction.icon}
-                actions={editorAction.actions}
-              ></EditorActionButton>
+            {value.map((editorAction) => (
+              <Grid item>
+                <EditorActionButton
+                  key={editorAction.label + key}
+                  label={editorAction.label}
+                  icon={editorAction.icon}
+                  actions={editorAction.actions}
+                ></EditorActionButton>
+              </Grid>
             ))}
             {i !== Object.entries(editorActions).length - 1 && (
-              <Divider orientation="vertical" variant="middle" flexItem />
+              <Divider
+                orientation="vertical"
+                variant="middle"
+                flexItem
+                sx={{ backgroundColor: "#3f4a57" }}
+              />
             )}
           </React.Fragment>
         ))}
-      </Stack>
-      <Divider variant="fullWidth" />
+      </Grid>
+      <Divider variant="fullWidth" sx={{ backgroundColor: "#3f4a57" }} />
     </>
   );
 };

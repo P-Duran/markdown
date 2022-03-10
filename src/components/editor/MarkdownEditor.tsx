@@ -1,61 +1,33 @@
-import { Container } from "@mui/material";
-import { Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
+import { CustomDecorator } from "src/types/EditorTypes";
+import { customCompositeDecorator } from "src/components/editor/decorators/CustomCompositeDecorator";
 import { useState } from "react";
 import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
-import { CustomDecorator } from "src/types/EditorTypes";
-import { replaceSelectedText } from "src/utils/EditorUtils";
-import { customCompositeDecorator } from "./decorators/CustomCompositeDecorator";
-
+import { Editor, EditorState } from "draft-js";
+import { useTheme } from "@mui/material";
 interface Props {
-  toolbar?: React.ReactNode;
-  onChange?: (editorState: EditorState) => void;
-  decorators?: CustomDecorator[];
+  children: React.ReactNode;
 }
 
-export const MarkdownEditor = ({
-  toolbar,
-  decorators,
-  onChange = () => {},
-}: Props) => {
-  const [ref, setRef] = useState<Editor | null>();
+export const MarkdownEditor = ({ children }: Props) => {
+  const theme = useTheme();
 
+  const [editorRef, setEditorRef] = useState<Editor | null>(null);
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(
-      decorators ? customCompositeDecorator(decorators) : undefined
+      customCompositeDecorator(Object.values(theme.editor.syntaxHighlight))
     )
   );
 
   return (
-    <div style={{ border: "1px solid #e3e3e3" }}>
-      <MarkdownEditorContext.Provider
-        value={{ editorState: editorState, setEditorState: setEditorState }}
-      >
-        {toolbar}
-      </MarkdownEditorContext.Provider>
-      <Container
-        onClick={() => ref?.focus()}
-        style={{
-          minHeight: 300,
-          paddingBottom: 10,
-          paddingTop: 20,
-          fontFamily:
-            "'source-code-pro', 'Menlo', 'Monaco', 'Consolas', 'Courier New', 'monospace'",
-        }}
-      >
-        <Editor
-          editorState={editorState}
-          onTab={(e) => {
-            e.preventDefault();
-            setEditorState(replaceSelectedText(editorState, (_) => "    "));
-          }}
-          onChange={(state) => {
-            setEditorState(state);
-            onChange(state);
-          }}
-          ref={(draftEditor) => setRef(draftEditor)}
-        />
-      </Container>
-    </div>
+    <MarkdownEditorContext.Provider
+      value={{
+        editorState: editorState,
+        setEditorState: setEditorState,
+        editorRef: editorRef,
+        setEditorRef: setEditorRef,
+      }}
+    >
+      <div style={theme.editor.style}>{children}</div>
+    </MarkdownEditorContext.Provider>
   );
 };

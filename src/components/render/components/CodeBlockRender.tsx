@@ -17,7 +17,7 @@ export const CodeBlockRender = ({
 
   const code = String(children).replace(/\n$/, "");
   const match = /language-(\w+)/.exec(className || "");
-  
+
   return !inline && match ? (
     <Container
       style={{
@@ -35,7 +35,7 @@ export const CodeBlockRender = ({
           borderRadius: 10,
           textAlign: "start",
           display: "inline-block",
-          minWidth: 400,
+          minWidth: "40%",
           maxWidth: "100%",
         }}
       >
@@ -92,7 +92,18 @@ export const CodeBlockRender = ({
       </div>
     </Container>
   ) : (
-    <code className={className} {...props}>
+    <code
+      className={className}
+      style={{
+        backgroundColor: "rgba(27,31,35,.05)",
+        color: "#e96900",
+        padding: "3px 5px",
+        margin: "0 2px",
+        borderRadius: "3px",
+        fontSize: "85%",
+      }}
+      {...props}
+    >
       {children}
     </code>
   );
