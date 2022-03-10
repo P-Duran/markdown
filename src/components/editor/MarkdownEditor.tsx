@@ -1,9 +1,9 @@
-import { CustomDecorator } from "src/types/EditorTypes";
 import { customCompositeDecorator } from "src/components/editor/decorators/CustomCompositeDecorator";
 import { useState } from "react";
 import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
 import { Editor, EditorState } from "draft-js";
 import { useTheme } from "@mui/material";
+import { MarkdownEditorContainer } from "./MarkdownEditorContainer";
 interface Props {
   children: React.ReactNode;
 }
@@ -27,7 +27,9 @@ export const MarkdownEditor = ({ children }: Props) => {
         setEditorRef: setEditorRef,
       }}
     >
-      <div style={theme.editor.style}>{children}</div>
+      <MarkdownEditorContainer theme={theme}>
+        {children}
+      </MarkdownEditorContainer>
     </MarkdownEditorContext.Provider>
   );
 };

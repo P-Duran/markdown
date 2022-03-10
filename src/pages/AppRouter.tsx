@@ -7,29 +7,27 @@ import { routes } from "./routes";
 
 export const AppRouter = (): ReactElement => {
   return (
-    <div>
-      <Router>
-        <NavBar />
+    <Router>
+      <NavBar />
 
-        <PageContainer>
-          <Routes>
-            {routes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={
-                  <LazyRoute
-                    componentPath={route.componentPath}
-                    componentName={route.component}
-                  />
-                }
-              />
-            ))}
-            {/* TODO: Not Found Page */}
-            <Route path="*" element={<p>No existe esta ruta</p>} />
-          </Routes>
-        </PageContainer>
-      </Router>
-    </div>
+      <PageContainer>
+        <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={
+                <LazyRoute
+                  componentPath={route.componentPath}
+                  componentName={route.component}
+                />
+              }
+            />
+          ))}
+          {/* TODO: Not Found Page */}
+          <Route path="*" element={<p>No existe esta ruta</p>} />
+        </Routes>
+      </PageContainer>
+    </Router>
   );
 };

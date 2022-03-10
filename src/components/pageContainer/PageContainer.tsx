@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React, { ReactElement } from "react";
 
 type Props = {
@@ -5,5 +6,9 @@ type Props = {
 };
 
 export const PageContainer = ({ children }: Props) => {
-  return <div>{children}</div>;
+  return (
+    <Grid container sx={{ overflowY: "overlay" }}>
+      {children}
+    </Grid>
+  );
 };

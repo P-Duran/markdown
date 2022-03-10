@@ -20,10 +20,17 @@ import {
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { menuItems } from "src/pages/menuItems";
+import { useNavigate } from "react-router-dom";
+import { colors } from "src/styles/colorPalette";
+import { useTranslation } from "react-i18next";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const NavBar = (): ReactElement => {
+  const [t] = useTranslation();
+  const navigate = useNavigate();
+
   const [openSidebar, setOpenSidebar] = React.useState<boolean>(false);
 
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
@@ -36,7 +43,7 @@ export const NavBar = (): ReactElement => {
 
   return (
     <>
-      <AppBar position="sticky">
+      <AppBar position="sticky" sx={{ backgroundColor: colors.darkPurple }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <IconButton
@@ -44,7 +51,7 @@ export const NavBar = (): ReactElement => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={() => setOpenSidebar(true)}
+              onClick={() => setOpenSidebar((prevState) => !prevState)}
               color="inherit"
               sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
             >
@@ -65,7 +72,7 @@ export const NavBar = (): ReactElement => {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={() => setOpenSidebar(true)}
+                onClick={() => setOpenSidebar((prevState) => !prevState)}
                 color="inherit"
               >
                 <MenuIcon />
@@ -119,26 +126,28 @@ export const NavBar = (): ReactElement => {
         anchor="left"
         open={openSidebar}
         onClose={() => setOpenSidebar(false)}
+        sx={{ zIndex: "1000" }}
       >
         <Box
-          sx={{ width: 250 }}
+          sx={{
+            width: 250,
+            paddingTop: "60px",
+          }}
           role="presentation"
           onClick={() => setOpenSidebar(false)}
           onKeyDown={() => setOpenSidebar(false)}
         >
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
+            {menuItems.map(({ label, icon, path, iconColor }) => (
+              <ListItem button key={path} onClick={() => navigate(path)}>
+                <ListItemIcon sx={{ color: iconColor }}>{icon}</ListItemIcon>
+                <ListItemText primary={t(label)} />
               </ListItem>
             ))}
           </List>
           <Divider />
           <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
+            {["Lorem", "Ipsum", "Algo"].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
