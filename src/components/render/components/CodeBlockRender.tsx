@@ -97,10 +97,9 @@ export const CodeBlockRender = ({
       style={{
         backgroundColor: "rgba(27,31,35,.05)",
         color: "#e96900",
-        padding: "3px 5px",
-        margin: "0 2px",
-        borderRadius: "3px",
+        padding: ".2em .4em",
         fontSize: "85%",
+        borderRadius: "6px",
       }}
       {...props}
     >

@@ -18,9 +18,8 @@ export const MarkdownToolBar = ({ editorActions }: Props) => {
         {Object.entries(editorActions).map(([key, value], i) => (
           <React.Fragment key={key}>
             {value.map((editorAction) => (
-              <Grid item>
+              <Grid item key={editorAction.label + key}>
                 <EditorActionButton
-                  key={editorAction.label + key}
                   label={editorAction.label}
                   icon={editorAction.icon}
                   actions={editorAction.actions}

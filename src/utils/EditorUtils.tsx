@@ -9,6 +9,7 @@ import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import LinkIcon from "@mui/icons-material/Link";
 import ImageIcon from "@mui/icons-material/Image";
 import { EditorAction } from "src/types/EditorTypes";
+import BackupTableIcon from "@mui/icons-material/BackupTable";
 
 export const getSelectedText = (editorState: EditorState): string => {
   const selection = editorState.getSelection();
@@ -123,6 +124,15 @@ export const editorActions: Record<string, EditorAction[]> = {
   ],
   misc: [
     {
+      label: "table",
+      icon: <BackupTableIcon fontSize="small" />,
+      actions: (editorState) =>
+        replaceSelectedText(
+          editorState,
+          (selectedText) => selectedText.trim() + "\n" + markdownTable
+        ),
+    },
+    {
       label: "code",
       icon: <CodeIcon fontSize="small" />,
       actions: (editorState) =>
@@ -161,3 +171,10 @@ export const editorActions: Record<string, EditorAction[]> = {
     },
   ],
 };
+
+const markdownTable =
+  "|  Tables  |      Are      | Cool  |\n" +
+  "|----------|---------------|-------|\n" +
+  "| col 1 is | test number 1 | $1600 |\n" +
+  "| col 2 is | test number 2 |   $12 |\n" +
+  "| col 3 is | test number 3 |    $1 |";

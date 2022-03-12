@@ -1,5 +1,5 @@
 import { Container, Box, CircularProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CodeBlockRender } from "./components/CodeBlockRender";
@@ -53,22 +53,24 @@ export const MarkdownRender = ({ value }: Props) => {
           <CircularProgress style={{ color: "#283039" }} />
         </Box>
       ) : (
-        <ReactMarkdown
-          children={markdown}
-          remarkPlugins={[remarkGfm]}
-          components={{
-            code: CodeBlockRender,
-            img: ImageComponent,
-            table: TableComponent,
-            h1: HeaderComponent,
-            h2: HeaderComponent,
-            h3: HeaderComponent,
-            h4: HeaderComponent,
-            h5: HeaderComponent,
-            h6: HeaderComponent,
-            hr: DividerComponent,
-          }}
-        />
+        <Suspense fallback={"hello"}>
+          <ReactMarkdown
+            children={markdown}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              code: CodeBlockRender,
+              img: ImageComponent,
+              table: TableComponent,
+              h1: HeaderComponent,
+              h2: HeaderComponent,
+              h3: HeaderComponent,
+              h4: HeaderComponent,
+              h5: HeaderComponent,
+              h6: HeaderComponent,
+              hr: DividerComponent,
+            }}
+          />
+        </Suspense>
       )}
     </Container>
   );

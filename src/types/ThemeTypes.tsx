@@ -11,24 +11,21 @@ export type SyntaxComponent =
   | "italic"
   | "strikethrough";
 
+interface EditorTheme {
+  style: React.CSSProperties;
+  editable: Partial<EditableTheme>;
+  syntaxHighlight: Partial<Record<SyntaxComponent, CustomDecorator>>;
+}
+
+interface EditableTheme {
+  style: React.CSSProperties;
+}
 declare module "@mui/material/styles" {
   interface Theme {
-    editor: {
-      style: React.CSSProperties;
-      editable: {
-        style: React.CSSProperties;
-      };
-      syntaxHighlight: Record<SyntaxComponent, CustomDecorator>;
-    };
+    editor: EditorTheme;
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
-    editor: {
-      style: React.CSSProperties;
-      editable: {
-        style: React.CSSProperties;
-      };
-      syntaxHighlight: Record<SyntaxComponent, CustomDecorator>;
-    };
+    editor?: Partial<EditorTheme>;
   }
 }
