@@ -56,6 +56,18 @@ export const Dashboard = (): ReactElement => {
               overflowY: "scroll",
               borderRadius: "10px",
               boxShadow: "0 5px 28px rgba(0, 0, 0, 0.55)",
+
+              "&::-webkit-scrollbar": {
+                width: "16px",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                padding: "0 4px",
+                borderRight: "4px solid transparent",
+                borderLeft: "4px solid transparent",
+                background: colors.darkGray,
+                backgroundClip: "padding-box",
+                borderRadius: "10000px",
+              },
             }}
           >
             <MarkdownRender value={markdownValue} />
