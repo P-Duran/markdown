@@ -1,31 +1,13 @@
-import { Grid } from "@mui/material";
-import { useState } from "react";
+import { I18nextProvider } from "react-i18next";
 import "./App.css";
-import { Editable } from "./components/editor/Editable";
-import { MarkdownEditor } from "./components/editor/MarkdownEditor";
-import { MarkdownToolBar } from "./components/editor/toolbar/MarkdownToolBar";
-import { MarkdownRender } from "./components/render/MarkdownRender";
-import { editorActions } from "./utils/EditorUtils";
+import i18n from "./i18n";
+import { AppRouter } from "./pages/AppRouter";
 
 function App() {
-  const [text, setText] = useState("");
-
   return (
-    <Grid container spacing={2}>
-      <Grid item sm={6}>
-        <MarkdownEditor>
-          <MarkdownToolBar editorActions={editorActions} />
-          <Editable
-            onChange={(state) => {
-              setText(state.getCurrentContent().getPlainText());
-            }}
-          />
-        </MarkdownEditor>
-      </Grid>
-      <Grid item sm={6}>
-        <MarkdownRender value={text} />
-      </Grid>
-    </Grid>
+    <I18nextProvider i18n={i18n}>
+      <AppRouter />
+    </I18nextProvider>
   );
 }
 

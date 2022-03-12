@@ -40,7 +40,7 @@ export const theme = createTheme({
       backgroundColor: "#283039",
       color: "#d5d7e0",
       height: "100%",
-      minHeight: "100vh",
+      minHeight: "calc(100vh - 64px)",
     },
     editable: {
       style: {
