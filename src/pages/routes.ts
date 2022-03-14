@@ -7,6 +7,11 @@ type RouteType = {
 export const routes: RouteType[] = [
   {
     path: "/",
+    componentPath: "home",
+    component: "Home",
+  },
+  {
+    path: "/dashboard",
     componentPath: "dashboard",
     component: "Dashboard",
   },
