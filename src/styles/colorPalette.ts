@@ -10,8 +10,14 @@ export type ColorPalette = {
   lightBlue: string;
   lightPurple: string;
 
+  lightestGray: string;
+
   white: string;
   black: string;
+
+  blueTwitter: string;
+  blueFacebook: string;
+  browserPagesGray: string;
 };
 
 export const colors: ColorPalette = {
@@ -26,6 +32,12 @@ export const colors: ColorPalette = {
   lightBlue: "#1c4c69",
   lightPurple: "#353F62",
 
+  lightestGray: "#EDEDED",
+
   white: "#FFFFFF",
   black: "#000000",
+
+  blueTwitter: "#1DA1F2",
+  blueFacebook: "#4267B2",
+  browserPagesGray: "#ECECEC",
 };
