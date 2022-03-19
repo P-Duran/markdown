@@ -10,9 +10,10 @@ import { DividerComponent } from "./components/DividerComponent";
 
 interface Props {
   value: string;
+  preview?: boolean;
 }
 
-export const MarkdownRender = ({ value }: Props) => {
+export const MarkdownRender = ({ value, preview }: Props) => {
   const [markdown, setMarkdown] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,7 +42,7 @@ export const MarkdownRender = ({ value }: Props) => {
           sx={{
             position: "fixed",
             top: "50%",
-            right: "25%",
+            right: preview ? "47.5%" : "25%",
             backgroundColor: "#d5d7e0",
             padding: 2,
             transform: "translate(50%, -50%)",
