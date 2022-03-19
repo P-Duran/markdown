@@ -28,17 +28,37 @@ import { logout } from "src/api/AuthenticationApi";
 import { useSnackbar } from "notistack";
 import { useCurrentUser } from "src/contexts/CurrentUserContext";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+type SettingOption = {
+  label: string;
+  action: () => void;
+};
 
 export const NavBar = (): ReactElement => {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const { setCurrentUser } = useCurrentUser();
+  const { currentUser, setCurrentUser } = useCurrentUser();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
-
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const settingOptions: SettingOption[] = [
+    { label: "Profile", action: () => undefined },
+    { label: "Account", action: () => undefined },
+    { label: "Dashboard", action: () => undefined },
+    {
+      label: "Logout",
+      action: () =>
+        logout()
+          .then(() => setCurrentUser())
+          .catch((err) =>
+            enqueueSnackbar(err.response.data, {
+              variant: "error",
+              preventDuplicate: true,
+            })
+          ),
+    },
+  ];
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -46,14 +66,6 @@ export const NavBar = (): ReactElement => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    logout()
-      .then(() => setCurrentUser())
-      .catch((err) =>
-        enqueueSnackbar(err.response.data, {
-          variant: "error",
-          preventDuplicate: true,
-        })
-      );
   };
 
   return (
@@ -108,7 +120,10 @@ export const NavBar = (): ReactElement => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar
+                    alt={currentUser?.name.toUpperCase()}
+                    src="/static/images/avatar/2.jpg"
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -127,9 +142,15 @@ export const NavBar = (): ReactElement => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                {settingOptions.map((setting) => (
+                  <MenuItem
+                    key={setting.label}
+                    onClick={() => {
+                      handleCloseUserMenu();
+                      setting.action();
+                    }}
+                  >
+                    <Typography textAlign="center">{setting.label}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

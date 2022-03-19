@@ -4,7 +4,25 @@ type RouteType = {
   componentPath: string;
 };
 
-export const routes: RouteType[] = [
+export const defaultRoutes: RouteType[] = [
+  {
+    path: "/",
+    componentPath: "home",
+    component: "Home",
+  },
+  {
+    path: "/login",
+    componentPath: "login",
+    component: "Login",
+  },
+  {
+    path: "/register",
+    componentPath: "register",
+    component: "Register",
+  },
+];
+
+export const loggedRoutes: RouteType[] = [
   {
     path: "/",
     componentPath: "home",
@@ -19,15 +37,5 @@ export const routes: RouteType[] = [
     path: "/editor",
     componentPath: "editor",
     component: "Editor",
-  },
-  {
-    path: "/login",
-    componentPath: "login",
-    component: "Login",
-  },
-  {
-    path: "/register",
-    componentPath: "register",
-    component: "Register",
   },
 ];
