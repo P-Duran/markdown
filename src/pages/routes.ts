@@ -15,4 +15,14 @@ export const routes: RouteType[] = [
     componentPath: "editor",
     component: "Editor",
   },
+  {
+    path: "/login",
+    componentPath: "login",
+    component: "Login",
+  },
+  {
+    path: "/register",
+    componentPath: "register",
+    component: "Register",
+  },
 ];
