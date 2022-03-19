@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,21 +24,36 @@ import { menuItems } from "src/pages/menuItems";
 import { useNavigate } from "react-router-dom";
 import { colors } from "src/styles/colorPalette";
 import { useTranslation } from "react-i18next";
+import { logout } from "src/api/AuthenticationApi";
+import { useSnackbar } from "notistack";
+import { useCurrentUser } from "src/contexts/CurrentUserContext";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const NavBar = (): ReactElement => {
   const [t] = useTranslation();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const { setCurrentUser } = useCurrentUser();
 
-  const [openSidebar, setOpenSidebar] = React.useState<boolean>(false);
+  const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    logout()
+      .then(() => setCurrentUser())
+      .catch((err) =>
+        enqueueSnackbar(err.response.data, {
+          variant: "error",
+          preventDuplicate: true,
+        })
+      );
   };
 
   return (
@@ -92,7 +107,7 @@ export const NavBar = (): ReactElement => {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={() => undefined} sx={{ p: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>

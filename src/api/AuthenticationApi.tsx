@@ -35,3 +35,7 @@ export const getCurrentUser = (): Promise<CurrentUser> => {
     .get("/current-user")
     .then((response) => response.data as CurrentUser);
 };
+
+export const logout = (): Promise<string> => {
+  return restApi.post("logout").then((response) => response.data as string);
+};

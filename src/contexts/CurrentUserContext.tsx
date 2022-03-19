@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 import { CurrentUser } from "src/types/AuthenticationTypes";
 
 export interface CurrentUserContext {
-  setCurrentUser: (user: CurrentUser) => void;
+  setCurrentUser: (user?: CurrentUser) => void;
   currentUser?: CurrentUser;
 }
 
