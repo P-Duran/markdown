@@ -24,9 +24,11 @@ export const FieldForm = ({
   const [formData, setFormData] = useState<FormData>({});
 
   const handleOnChange = (text: string, fieldData: InputFieldData) => {
-    const newFormData = { ...formData, [fieldData.key]: text };
-    onChange(newFormData);
-    setFormData(newFormData);
+    setFormData((prevState) => {
+      const newFormData = { ...prevState, [fieldData.key]: text };
+      onChange(newFormData);
+      return newFormData;
+    });
   };
 
   return (

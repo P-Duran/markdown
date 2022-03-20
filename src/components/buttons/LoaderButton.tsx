@@ -4,11 +4,13 @@ import { useState } from "react";
 interface Props {
   onClick?: () => Promise<any>;
   label?: string;
+  backgroundColor?: string;
 }
 
 export const LoaderButton = ({
   onClick = () => Promise.resolve(undefined),
   label = "Button",
+  backgroundColor,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,9 +23,10 @@ export const LoaderButton = ({
       style={{
         padding: 13,
         borderRadius: 10,
-        backgroundColor: "#4692f9",
+        backgroundColor: backgroundColor ?? "#4692f9",
         color: "white",
-        height: 50
+        height: 50,
+        width: "100%",
       }}
     >
       {isLoading ? (

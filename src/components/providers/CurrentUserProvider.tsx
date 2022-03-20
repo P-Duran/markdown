@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCurrentUser } from "src/api/AuthenticationApi";
+import { getCurrentUser } from "src/api/authentication";
 import { CurrentUserContext } from "src/contexts/CurrentUserContext";
 import { CurrentUser } from "src/types/AuthenticationTypes";
 

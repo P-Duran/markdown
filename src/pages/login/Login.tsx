@@ -1,13 +1,23 @@
-import { Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import KeyIcon from "@mui/icons-material/Key";
 import { FieldForm } from "src/components/form/FIeldForm";
-import { login } from "src/api/AuthenticationApi";
+import { login } from "src/api/authentication";
 import { useCurrentUser } from "src/contexts/CurrentUserContext";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { LoaderButton } from "src/components/buttons/LoaderButton";
+import { colors } from "src/styles/colorPalette";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const [t] = useTranslation();
   const { setCurrentUser } = useCurrentUser();
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
+
   return (
     <Grid
       container
@@ -23,7 +33,10 @@ export const Login = () => {
           submitText="Login"
           onSubmit={(formData) =>
             login(formData)
-              .then(setCurrentUser)
+              .then((user) => {
+                setCurrentUser(user);
+                navigate("/");
+              })
               .catch((err) =>
                 enqueueSnackbar(err.response.data, {
                   variant: "error",
@@ -36,11 +49,38 @@ export const Login = () => {
             {
               key: "password",
               label: "Password",
-              type: "password",
-              endAdornment: <KeyIcon />,
+              type: showPass ? "text" : "password",
+              endAdornment: (
+                <KeyIcon
+                  sx={{ cursor: "pointer" }}
+                  onMouseDown={() => setShowPass(true)}
+                  onMouseUp={() => setShowPass(false)}
+                />
+              ),
             },
           ]}
         />
+        <Container maxWidth="xs" sx={{ paddingY: "24px" }}>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+            }}
+          >
+            <Typography variant="h5">{t("login.notRegister")}</Typography>
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", width: "100%" }}
+            >
+              <LoaderButton
+                backgroundColor={colors.lightGreen}
+                label={t("login.createAccount")}
+              />
+            </Link>
+          </Grid>
+        </Container>
       </Grid>
     </Grid>
   );

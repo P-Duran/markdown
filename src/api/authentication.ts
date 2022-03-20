@@ -1,7 +1,14 @@
 import axios from "axios";
 import { CurrentUser } from "src/types/AuthenticationTypes";
+import {
+  AUTHENTICATION_PATH,
+  CURRENT_USER_PATH,
+  LOGIN_PATH,
+  LOGOUT_PATH,
+  REGISTER_PATH,
+} from "./paths";
 
-const path = "http://localhost:5000/authentication";
+const path = `${process.env.REACT_APP_API_BASE_URL}${AUTHENTICATION_PATH}`;
 
 export const restApi = axios.create({
   baseURL: path,
@@ -20,22 +27,22 @@ restApi.interceptors.request.use(
 
 export const login = (data: any): Promise<CurrentUser> => {
   return restApi
-    .post("/login", data)
+    .post(LOGIN_PATH, data)
     .then((response) => response.data as CurrentUser);
 };
 
 export const register = (data: any): Promise<string> => {
   return restApi
-    .post("/register", data)
+    .post(REGISTER_PATH, data)
     .then((response) => response.data as string);
 };
 
 export const getCurrentUser = (): Promise<CurrentUser> => {
   return restApi
-    .get("/current-user")
+    .get(CURRENT_USER_PATH)
     .then((response) => response.data as CurrentUser);
 };
 
 export const logout = (): Promise<string> => {
-  return restApi.post("logout").then((response) => response.data as string);
+  return restApi.post(LOGOUT_PATH).then((response) => response.data as string);
 };
