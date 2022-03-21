@@ -1,8 +1,7 @@
 import { Container, Grid, Typography } from "@mui/material";
 import KeyIcon from "@mui/icons-material/Key";
 import { FieldForm } from "src/components/form/FIeldForm";
-import { login } from "src/api/authentication";
-import { useCurrentUser } from "src/contexts/CurrentUserContext";
+import { useAuth } from "src/contexts/AuthContext";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -13,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [t] = useTranslation();
-  const { setCurrentUser } = useCurrentUser();
+  const { login } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
@@ -32,11 +31,8 @@ export const Login = () => {
           subtitle="Login into the application"
           submitText="Login"
           onSubmit={(formData) =>
-            login(formData)
-              .then((user) => {
-                setCurrentUser(user);
-                navigate("/");
-              })
+            login({ email: formData["email"], password: formData["password"] })
+              .then(() => navigate("/"))
               .catch((err) =>
                 enqueueSnackbar(err.response.data, {
                   variant: "error",

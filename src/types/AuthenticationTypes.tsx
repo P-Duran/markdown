@@ -10,6 +10,6 @@ export enum Role {
 }
 
 export interface LoginRequest {
-  user: string;
+  email: string;
   password: string;
 }

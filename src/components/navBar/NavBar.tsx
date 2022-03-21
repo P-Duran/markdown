@@ -24,9 +24,8 @@ import { menuItems } from "src/pages/menuItems";
 import { useNavigate } from "react-router-dom";
 import { colors } from "src/styles/colorPalette";
 import { useTranslation } from "react-i18next";
-import { logout } from "src/api/authentication";
 import { useSnackbar } from "notistack";
-import { useCurrentUser } from "src/contexts/CurrentUserContext";
+import { useAuth } from "src/contexts/AuthContext";
 
 type SettingOption = {
   label: string;
@@ -37,7 +36,7 @@ export const NavBar = (): ReactElement => {
   const [t] = useTranslation();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const { currentUser, setCurrentUser } = useCurrentUser();
+  const { currentUser, logout } = useAuth();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -50,10 +49,7 @@ export const NavBar = (): ReactElement => {
       label: "Logout",
       action: () =>
         logout()
-          .then(() => {
-            setCurrentUser();
-            navigate("/");
-          })
+          .then(() => navigate("/"))
           .catch((err) =>
             enqueueSnackbar(err.response.data, {
               variant: "error",

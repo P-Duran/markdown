@@ -2,12 +2,12 @@ import React, { ReactElement, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { NavBar } from "src/components/navBar/NavBar";
 import { PageContainer } from "src/components/pageContainer/PageContainer";
-import { useCurrentUser } from "src/contexts/CurrentUserContext";
+import { useAuth } from "src/contexts/AuthContext";
 import { LazyRoute } from "./LazyRoute";
 import { defaultRoutes, loggedRoutes } from "./routes";
 
 export const AppRouter = (): ReactElement => {
-  const { currentUser } = useCurrentUser();
+  const { currentUser } = useAuth();
 
   const routes = useMemo(
     () => (currentUser ? loggedRoutes : defaultRoutes),
