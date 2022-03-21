@@ -7,16 +7,16 @@ import { LazyRoute } from "./LazyRoute";
 import { defaultRoutes, loggedRoutes } from "./routes";
 
 export const AppRouter = (): ReactElement => {
-  const { currentUser } = useAuth();
+  const { isLogged } = useAuth();
 
   const routes = useMemo(
-    () => (currentUser ? loggedRoutes : defaultRoutes),
-    [currentUser]
+    () => (isLogged ? loggedRoutes : defaultRoutes),
+    [isLogged]
   );
 
   return (
     <Router>
-      {currentUser && <NavBar />}
+      {isLogged && <NavBar />}
 
       <PageContainer>
         <Routes>
