@@ -7,6 +7,7 @@ interface Props {
   label?: string;
   backgroundColor?: string;
   delay?: number;
+  loading?: boolean;
 }
 
 export const LoaderButton = ({
@@ -14,6 +15,7 @@ export const LoaderButton = ({
   label = "Button",
   backgroundColor = "#4692f9",
   delay = 500,
+  loading,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,8 +29,13 @@ export const LoaderButton = ({
     >
       <ButtonBase
         onClick={() => {
-          setIsLoading(true);
-          setTimeout(() => onClick().finally(() => setIsLoading(false)), delay);
+          if (!isLoading && !loading) {
+            setIsLoading(true);
+            setTimeout(
+              () => onClick().finally(() => setIsLoading(false)),
+              delay
+            );
+          }
         }}
         style={{
           padding: 13,
@@ -37,7 +44,7 @@ export const LoaderButton = ({
           width: "100%",
         }}
       >
-        {isLoading ? (
+        {loading || isLoading ? (
           <CircularProgress style={{ color: "white" }} size={25} />
         ) : (
           <Typography sx={{ color: "white" }}>{label}</Typography>

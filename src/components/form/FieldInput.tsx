@@ -26,6 +26,7 @@ interface Props {
   label?: string;
   endAdornment?: React.ReactNode;
   onChange?: (text: string) => void;
+  onKeyDown?: (code: string) => void;
   error?: boolean;
 }
 
@@ -34,6 +35,7 @@ export const FieldInput = ({
   label,
   endAdornment,
   onChange,
+  onKeyDown = () => {},
   error = false,
 }: Props) => {
   return (
@@ -47,6 +49,7 @@ export const FieldInput = ({
         endAdornment={endAdornment}
         onChange={(e) => onChange && onChange(e.target.value)}
         style={error === undefined || error ? { border: "1px solid red" } : {}}
+        onKeyDown={(e) => onKeyDown(e.code)}
       />
     </FormControl>
   );

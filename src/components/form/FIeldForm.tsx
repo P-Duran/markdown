@@ -22,6 +22,7 @@ export const FieldForm = ({
   submitText = "Submit",
 }: Props) => {
   const [formData, setFormData] = useState<FormData>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnChange = (text: string, fieldData: InputFieldData) => {
     setFormData((prevState) => {
@@ -29,6 +30,11 @@ export const FieldForm = ({
       onChange(newFormData);
       return newFormData;
     });
+  };
+
+  const handleOnSubmitWithDelay = () => {
+    setIsLoading(true);
+    setTimeout(() => onSubmit(formData).then(() => setIsLoading(false)), 500);
   };
 
   return (
@@ -45,9 +51,14 @@ export const FieldForm = ({
             type={data.type}
             endAdornment={data.endAdornment}
             onChange={(text) => handleOnChange(text, data)}
+            onKeyDown={(code) => code === "Enter" && handleOnSubmitWithDelay()}
           />
         ))}
-        <LoaderButton label={submitText} onClick={() => onSubmit(formData)} />
+        <LoaderButton
+          loading={isLoading}
+          label={submitText}
+          onClick={() => onSubmit(formData)}
+        />
       </Stack>
     </Container>
   );
