@@ -9,6 +9,7 @@ import { LoaderButton } from "src/components/buttons/LoaderButton";
 import { colors } from "src/styles/colorPalette";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export const Login = () => {
   const [t] = useTranslation();
@@ -25,7 +26,7 @@ export const Login = () => {
       }}
     >
       <Grid item sm={7} sx={{ backgroundColor: "#ebf4fb" }}></Grid>
-      <Grid item sm={5} sx={{ height: "100%" }}>
+      <Grid item sm={5} sx={{ height: "100%", paddingTop: 10 }}>
         <FieldForm
           title="Get Started"
           subtitle="Login into the application"
@@ -47,11 +48,18 @@ export const Login = () => {
               label: "Password",
               type: showPass ? "text" : "password",
               endAdornment: (
-                <KeyIcon
-                  sx={{ cursor: "pointer" }}
-                  onMouseDown={() => setShowPass(true)}
-                  onMouseUp={() => setShowPass(false)}
-                />
+                <motion.div
+                  transition={{ duration: 0.5 }}
+                  whileHover={{
+                    rotate: [0, 20, -20, 20, -20, 0],
+                  }}
+                >
+                  <KeyIcon
+                    sx={{ cursor: "pointer" }}
+                    onMouseDown={() => setShowPass(true)}
+                    onMouseUp={() => setShowPass(false)}
+                  />
+                </motion.div>
               ),
             },
           ]}
