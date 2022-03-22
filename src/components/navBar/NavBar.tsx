@@ -17,6 +17,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  MenuList,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
@@ -26,10 +27,13 @@ import { colors } from "src/styles/colorPalette";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
 import { useAuth } from "src/contexts/AuthContext";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 type SettingOption = {
   label: string;
   action: () => void;
+  icon?: React.ReactNode;
 };
 
 export const NavBar = (): ReactElement => {
@@ -42,11 +46,10 @@ export const NavBar = (): ReactElement => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const settingOptions: SettingOption[] = [
-    { label: "Profile", action: () => undefined },
-    { label: "Account", action: () => undefined },
-    { label: "Dashboard", action: () => undefined },
+    { label: "Profile", action: () => undefined, icon: <AccountCircleIcon /> },
     {
       label: "Logout",
+      icon: <LogoutIcon />,
       action: () =>
         logout()
           .then(() => navigate("/"))
@@ -69,7 +72,15 @@ export const NavBar = (): ReactElement => {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: colors.darkPurple }}>
+      <AppBar
+        position="sticky"
+        sx={{
+          backgroundColor: colors.white,
+          borderBottom: "2px #ebecee solid",
+          color: "black",
+        }}
+        elevation={0}
+      >
         <Container maxWidth={false}>
           <Toolbar disableGutters>
             <IconButton
@@ -140,18 +151,39 @@ export const NavBar = (): ReactElement => {
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    borderRadius: 2,
+                    border: "1px #ebecee solid",
+                    boxShadow: "0px 5px 35px 0px rgba(0,0,0,0.1)",
+                  },
+                }}
               >
-                {settingOptions.map((setting) => (
-                  <MenuItem
-                    key={setting.label}
-                    onClick={() => {
-                      handleCloseUserMenu();
-                      setting.action();
-                    }}
-                  >
-                    <Typography textAlign="center">{setting.label}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuList style={{ padding: 0 }}>
+                  {settingOptions.map((setting, i) => (
+                    <MenuItem
+                      key={setting.label}
+                      sx={{
+                        py: 2,
+                        px: 4,
+                        borderBottom:
+                          settingOptions.length - 1 !== i
+                            ? "2px #ebecee solid"
+                            : undefined,
+                      }}
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        setting.action();
+                      }}
+                    >
+                      <ListItemIcon>{setting.icon}</ListItemIcon>
+                      <Typography textAlign="center">
+                        {setting.label}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </MenuList>
               </Menu>
             </Box>
           </Toolbar>
