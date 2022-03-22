@@ -19,73 +19,65 @@ export const Login = () => {
   const [showPass, setShowPass] = useState(false);
 
   return (
-    <Grid
-      container
-      sx={{
-        height: "100vh",
-      }}
-    >
-      <Grid item sm={7} sx={{ backgroundColor: "#ebf4fb" }}></Grid>
-      <Grid item sm={5} sx={{ height: "100%", paddingTop: 10 }}>
-        <FieldForm
-          title="Get Started"
-          subtitle="Login into the application"
-          submitText="Login"
-          onSubmit={(formData) =>
-            login({ email: formData["email"], password: formData["password"] })
-              .then(() => navigate("/"))
-              .catch((err) =>
-                enqueueSnackbar(err.response.data, {
-                  variant: "error",
-                  preventDuplicate: true,
-                })
-              )
-          }
-          fieldsData={[
-            { key: "email", label: "Email" },
-            {
-              key: "password",
-              label: "Password",
-              type: showPass ? "text" : "password",
-              endAdornment: (
-                <motion.div
-                  transition={{ duration: 0.5 }}
-                  whileHover={{
-                    rotate: [0, 20, -20, 20, -20, 0],
-                  }}
-                >
-                  <KeyIcon
-                    sx={{ cursor: "pointer" }}
-                    onMouseDown={() => setShowPass(true)}
-                    onMouseUp={() => setShowPass(false)}
-                  />
-                </motion.div>
-              ),
-            },
-          ]}
-        />
-        <Container maxWidth="xs" sx={{ paddingY: "24px" }}>
-          <Grid
-            item
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-            }}
+    <Grid item sm={5} sx={{ height: "100%", paddingTop: 10 }}>
+      <FieldForm
+        title="Get Started"
+        subtitle="Login into the application"
+        submitText="Login"
+        onSubmit={(formData) =>
+          login({ email: formData["email"], password: formData["password"] })
+            .then(() => navigate("/"))
+            .catch((err) =>
+              enqueueSnackbar(err.response.data, {
+                variant: "error",
+                preventDuplicate: true,
+              })
+            )
+        }
+        fieldsData={[
+          { key: "email", label: "Email" },
+          {
+            key: "password",
+            label: "Password",
+            type: showPass ? "text" : "password",
+            endAdornment: (
+              <motion.div
+                transition={{ duration: 0.5 }}
+                whileHover={{
+                  rotate: [0, 20, -20, 20, -20, 0],
+                }}
+              >
+                <KeyIcon
+                  sx={{ cursor: "pointer" }}
+                  onMouseDown={() => setShowPass(true)}
+                  onMouseUp={() => setShowPass(false)}
+                />
+              </motion.div>
+            ),
+          },
+        ]}
+      />
+      <Container maxWidth="xs" sx={{ paddingY: "24px" }}>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+          }}
+        >
+          <Typography variant="h5">{t("login.notRegister")}</Typography>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", width: "100%" }}
           >
-            <Typography variant="h5">{t("login.notRegister")}</Typography>
-            <Link
-              to="/register"
-              style={{ textDecoration: "none", width: "100%" }}
-            >
-              <LoaderButton
-                backgroundColor={colors.lightGreen}
-                label={t("login.createAccount")}
-              />
-            </Link>
-          </Grid>
-        </Container>
-      </Grid>
+            <LoaderButton
+              backgroundColor={colors.lightGreen}
+              label={t("login.createAccount")}
+            />
+          </Link>
+        </Grid>
+      </Container>
     </Grid>
   );
 };
