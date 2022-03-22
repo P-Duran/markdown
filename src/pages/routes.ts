@@ -4,14 +4,17 @@ type RouteType = {
   componentPath: string;
 };
 
-export const defaultRoutes: RouteType[] = [
+export const initialRoutes: RouteType[] = [
+  {
+    path: "/*",
+    componentPath: "auth",
+    component: "Auth",
+  },
+];
+
+export const authRoutes: RouteType[] = [
   {
     path: "/",
-    componentPath: "home",
-    component: "Home",
-  },
-  {
-    path: "/login",
     componentPath: "login",
     component: "Login",
   },

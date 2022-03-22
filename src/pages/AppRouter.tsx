@@ -4,13 +4,13 @@ import { NavBar } from "src/components/navBar/NavBar";
 import { PageContainer } from "src/components/pageContainer/PageContainer";
 import { useAuth } from "src/contexts/AuthContext";
 import { LazyRoute } from "./LazyRoute";
-import { defaultRoutes, loggedRoutes } from "./routes";
+import { initialRoutes, loggedRoutes } from "./routes";
 
 export const AppRouter = (): ReactElement => {
   const { isLogged } = useAuth();
 
   const routes = useMemo(
-    () => (isLogged ? loggedRoutes : defaultRoutes),
+    () => (isLogged ? loggedRoutes : initialRoutes),
     [isLogged]
   );
 
