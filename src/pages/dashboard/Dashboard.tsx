@@ -21,7 +21,7 @@ export const Dashboard = (): ReactElement => {
         }}
       >
         {markdownMock.map((markdownValue, index) => (
-          <AlternativePreview markdownValue={markdownValue} />
+          <AlternativePreview markdownValue={markdownValue} index={index}/>
           // <MarkdownPreview
           //   key={index}
           //   title={"Título de la página"}

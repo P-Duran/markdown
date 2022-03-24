@@ -18,7 +18,7 @@ export const AlternativePreview = (props: any) => {
       <motion.div
         onClick={(e) => {
           e.stopPropagation();
-          console.log("hi");
+          console.log(props.index);
         }}
         style={{
           border: "2px #f0f0f3 solid",
@@ -26,7 +26,10 @@ export const AlternativePreview = (props: any) => {
           height: "100%",
           borderRadius: 8,
           cursor: "pointer",
+          scale: 0
         }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
         whileHover={{
           border: "2px #82b7ff solid",
           boxShadow: "0px 5px 35px 0px rgba(0,0,0,0.0.5)",
