@@ -26,7 +26,7 @@ export const AlternativePreview = (props: any) => {
           height: "100%",
           borderRadius: 8,
           cursor: "pointer",
-          scale: 0
+          scale: 0,
         }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
@@ -66,21 +66,29 @@ export const AlternativePreview = (props: any) => {
               position: "relative",
             }}
           >
-            <motion.div
+            <Box
               style={{
-                scale: 0.5,
-                height: 100,
-                // backgroundColor: "blue",
+                height: "100%",
                 position: "relative",
-                top: "-40%",
+                top: "-70%",
                 pointerEvents: "none",
                 userSelect: "none",
               }}
             >
-              <Container sx={{ backgroundColor: "white" }}>
-                <MarkdownRender value={props.markdownValue} />
+              <Container
+                sx={{
+                  height: "300%",
+                  transform: "scale(0.5)",
+                  backgroundColor: "white",
+                  p: 5,
+                }}
+              >
+                <MarkdownRender
+                  value={props.markdownValue.slice(0, 200)}
+                  preview={true}
+                />
               </Container>
-            </motion.div>
+            </Box>
           </Box>
           <Container
             sx={{ height: 120, pt: 2, borderBottom: "2px #f0f0f3 solid" }}
