@@ -61,7 +61,7 @@ export const HomeView = () => {
       <Typography
         color="white"
         variant="h3"
-        sx={{ display: "flex", justifyContent: "center" }}
+        sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
       >
         <SplitText>{t("homeView.description")}</SplitText>
       </Typography>
