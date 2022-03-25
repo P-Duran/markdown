@@ -13,5 +13,6 @@ export const es = {
     "homeView.title": "Crea tu propio Markdown",
     "homeView.description":
       "Construye de una manera ágil y sencilla páginas web con Markdown",
+    "homeView.returnHome": "Volver al Inicio",
   },
 };

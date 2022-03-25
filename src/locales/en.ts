@@ -13,5 +13,6 @@ export const en = {
     "homeView.title": "Make your own Markdown",
     "homeView.description":
       "Build web pages with Markdown in an agile and simple way",
+    "homeView.returnHome": "Return Home",
   },
 };

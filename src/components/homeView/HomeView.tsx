@@ -8,6 +8,7 @@ import { motion, useAnimation } from "framer-motion";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useTranslation } from "react-i18next";
+import { SplitText } from "../splitText/SplitText";
 
 export const HomeView = () => {
   const [t] = useTranslation();
@@ -53,16 +54,16 @@ export const HomeView = () => {
       <Typography
         color="white"
         variant="h1"
-        sx={{ textAlign: "center", fontWeight: 800 }}
+        sx={{ textAlign: "center", fontWeight: 800, paddingBottom: 3 }}
       >
         {t("homeView.title")}
       </Typography>
       <Typography
         color="white"
         variant="h3"
-        sx={{ textAlign: "center", paddingTop: 3 }}
+        sx={{ display: "flex", justifyContent: "center" }}
       >
-        {t("homeView.description")}
+        <SplitText>{t("homeView.description")}</SplitText>
       </Typography>
       <Carousel
         showThumbs={false}
