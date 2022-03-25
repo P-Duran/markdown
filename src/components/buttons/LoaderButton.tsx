@@ -1,6 +1,7 @@
 import { ButtonBase, CircularProgress, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { colors } from "src/styles/colorPalette";
 
 interface Props {
   onClick?: () => Promise<any>;
@@ -13,7 +14,7 @@ interface Props {
 export const LoaderButton = ({
   onClick = () => Promise.resolve(undefined),
   label = "Button",
-  backgroundColor = "#4692f9",
+  backgroundColor = colors.primary,
   delay = 500,
   loading,
 }: Props) => {

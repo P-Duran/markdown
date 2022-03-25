@@ -1,4 +1,6 @@
 export type ColorPalette = {
+  primary: string;
+
   darkGray: string;
   darkRed: string;
   darkBlue: string;
@@ -21,6 +23,8 @@ export type ColorPalette = {
 };
 
 export const colors: ColorPalette = {
+  primary: "#4692f9",
+
   darkGray: "#778F9B",
   darkRed: "#6B1823",
   darkBlue: "#002B45",

@@ -8,5 +8,10 @@ export const es = {
     // Authentication labels
     "login.notRegister": "¿No estás registrado?",
     "login.createAccount": "Crea una cuenta nueva",
+
+    // HomeView labels
+    "homeView.title": "Crea tu propio Markdown",
+    "homeView.description":
+      "Construye de una manera ágil y sencilla páginas web con Markdown",
   },
 };
