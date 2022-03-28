@@ -1,30 +1,36 @@
-import { Grid } from "@mui/material";
-import React, { ReactElement } from "react";
+import { Grid, Box } from "@mui/material";
+import { ReactElement } from "react";
 import { markdownMock } from "src/mocks/markdownMocks";
-import { colors } from "../../styles/colorPalette";
-import { MarkdownPreview } from "src/components/markdownPreview/MarkdownPreview";
+import { AlternativePreview } from "src/components/markdownPreview/AlternativePreview";
 
 export const Dashboard = (): ReactElement => {
   return (
-    <Grid
-      container
+    <Box
       sx={{
         width: "100vw",
-        minHeight: "calc(100vh - 64px)",
-        backgroundSize: "50px 50px",
-        backgroundImage: `linear-gradient(to right, ${colors.lightGray} 1px, transparent 1px), 
-          linear-gradient(to bottom, ${colors.lightGray} 1px, ${colors.darkPurple} 1px)`,
+        minHeight: "calc(100vh - 66px)",
+        backgroundColor: "#f3f4f6",
       }}
     >
-      {markdownMock.map((markdownValue, index) => (
-        <MarkdownPreview
-          key={index}
-          title={"Título de la página"}
-          markdown={markdownValue}
-          onEditClick={() => null}
-          onViewClick={() => null}
-        />
-      ))}
-    </Grid>
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        sx={{
+          padding: "20px",
+        }}
+      >
+        {markdownMock.map((markdownValue, index) => (
+          <AlternativePreview markdownValue={markdownValue} index={index}/>
+          // <MarkdownPreview
+          //   key={index}
+          //   title={"Título de la página"}
+          //   markdown={markdownValue}
+          //   onEditClick={() => null}
+          //   onViewClick={() => null}
+          // />
+        ))}
+      </Grid>
+    </Box>
   );
 };
