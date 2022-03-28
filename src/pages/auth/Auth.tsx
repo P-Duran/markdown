@@ -1,6 +1,8 @@
 import { Grid } from "@mui/material";
 import React, { ReactElement } from "react";
 import { Route, Routes } from "react-router-dom";
+import { HomeView } from "src/components/homeView/HomeView";
+import { NotFound } from "src/components/notFound/NotFound";
 import { LazyRoute } from "../LazyRoute";
 import { authRoutes } from "../routes";
 
@@ -12,7 +14,7 @@ export const Auth = (): ReactElement => {
         height: "100vh",
       }}
     >
-      <Grid item sm={7} sx={{ backgroundColor: "#ebf4fb" }}></Grid>
+      <HomeView />
       <Routes>
         {authRoutes.map((route) => (
           <Route
@@ -27,7 +29,7 @@ export const Auth = (): ReactElement => {
           />
         ))}
         {/* TODO: Not Found Page */}
-        <Route path="*" element={<p>No existe esta ruta</p>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Grid>
   );
