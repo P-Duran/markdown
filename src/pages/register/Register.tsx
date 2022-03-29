@@ -15,7 +15,7 @@ export const Register = () => {
   const [showPass2, setShowPass2] = useState(false);
 
   return (
-    <Grid item sm={5} sx={{ height: "100%" }}>
+    <>
       <FieldForm
         title="Get Started"
         subtitle="Register into the application"
@@ -65,6 +65,6 @@ export const Register = () => {
           },
         ]}
       />
-    </Grid>
+    </>
   );
 };

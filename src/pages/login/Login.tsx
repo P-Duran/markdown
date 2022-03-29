@@ -19,7 +19,7 @@ export const Login = () => {
   const [showPass, setShowPass] = useState(false);
 
   return (
-    <Grid item sm={5} sx={{ height: "100%", paddingTop: 10 }}>
+    <>
       <FieldForm
         title="Get Started"
         subtitle="Login into the application"
@@ -78,6 +78,6 @@ export const Login = () => {
           </Link>
         </Grid>
       </Container>
-    </Grid>
+    </>
   );
 };

@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useTranslation } from "react-i18next";
 import { SplitText } from "../splitText/SplitText";
+import { WorkingFromHome } from "src/resources/svg/WorkingFromHome";
 
 export const HomeView = () => {
   const [t] = useTranslation();
@@ -41,7 +42,17 @@ export const HomeView = () => {
         break;
     }
   }, [controls, currentView]);
-
+  return (
+    <Grid item sm={6} style={{ backgroundColor: "#edf5ff" }}>
+      <motion.div
+        style={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+      >
+        <WorkingFromHome />
+      </motion.div>
+    </Grid>
+  );
   return (
     <Grid
       item

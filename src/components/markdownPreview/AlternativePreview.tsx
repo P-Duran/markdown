@@ -81,6 +81,7 @@ export const AlternativePreview = (props: any) => {
                   transform: "scale(0.5)",
                   backgroundColor: "white",
                   p: 5,
+                  borderRadius: 3
                 }}
               >
                 <MarkdownRender

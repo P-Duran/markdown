@@ -15,22 +15,24 @@ export const Auth = (): ReactElement => {
       }}
     >
       <HomeView />
-      <Routes>
-        {authRoutes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={
-              <LazyRoute
-                componentPath={route.componentPath}
-                componentName={route.component}
-              />
-            }
-          />
-        ))}
-        {/* TODO: Not Found Page */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Grid item sm={6} sx={{ height: "100%", paddingTop: 5 }}>
+        <Routes>
+          {authRoutes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={
+                <LazyRoute
+                  componentPath={route.componentPath}
+                  componentName={route.component}
+                />
+              }
+            />
+          ))}
+          {/* TODO: Not Found Page */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Grid>
     </Grid>
   );
 };
