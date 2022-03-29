@@ -11,14 +11,17 @@ import { MarkdownRender } from "src/components/render/MarkdownRender";
 import { motion } from "framer-motion";
 import ClearIcon from "@mui/icons-material/Clear";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { useNavigate } from "react-router-dom";
 
 export const AlternativePreview = (props: any) => {
+  const navigate = useNavigate();
+
   return (
     <Grid item sx={{ height: 300, width: 350 }}>
       <motion.div
         onClick={(e) => {
           e.stopPropagation();
-          console.log(props.index);
+          navigate("/editor");
         }}
         style={{
           border: "2px #f0f0f3 solid",
@@ -81,7 +84,7 @@ export const AlternativePreview = (props: any) => {
                   transform: "scale(0.5)",
                   backgroundColor: "white",
                   p: 5,
-                  borderRadius: 3
+                  borderRadius: 3,
                 }}
               >
                 <MarkdownRender
