@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import GridViewIcon from "@mui/icons-material/GridView";
 import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
 import { colors } from "src/styles/colorPalette";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -21,7 +21,7 @@ export const menuItems: MenuItem[] = [
   {
     label: "menuItem.dashboard",
     path: "/dashboard",
-    icon: <DashboardRoundedIcon />,
+    icon: <GridViewIcon />,
     iconColor: colors.darkRed,
   },
   {
