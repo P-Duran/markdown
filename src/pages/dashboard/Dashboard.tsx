@@ -6,7 +6,7 @@ import { AlternativePreview } from "src/components/markdownPreview/AlternativePr
 export const Dashboard = (): ReactElement => {
   return (
     <Box>
-      <Grid container spacing={3} direction="row">
+      <Grid container spacing={3} direction="row" sx={{padding: 3}}>
         {markdownMock.map((markdownValue, index) => (
           <AlternativePreview markdownValue={markdownValue} index={index} />
         ))}
