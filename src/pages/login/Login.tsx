@@ -10,6 +10,7 @@ import { colors } from "src/styles/colorPalette";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Paths } from "../paths";
 
 export const Login = () => {
   const [t] = useTranslation();
@@ -26,7 +27,7 @@ export const Login = () => {
         submitText="Login"
         onSubmit={(formData) =>
           login({ email: formData["email"], password: formData["password"] })
-            .then(() => navigate("/"))
+            .then(() => navigate(Paths.HOME))
             .catch((err) =>
               enqueueSnackbar(err.response.data, {
                 variant: "error",

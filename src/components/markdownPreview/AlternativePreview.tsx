@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import ClearIcon from "@mui/icons-material/Clear";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useNavigate } from "react-router-dom";
+import { Paths } from "src/pages/paths";
 
 export const AlternativePreview = (props: any) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const AlternativePreview = (props: any) => {
       <motion.div
         onClick={(e) => {
           e.stopPropagation();
-          navigate("/editor");
+          navigate(Paths.EDITOR);
         }}
         style={{
           border: "2px #f0f0f3 solid",

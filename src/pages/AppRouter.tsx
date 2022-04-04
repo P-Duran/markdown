@@ -16,7 +16,7 @@ export const AppRouter = (): ReactElement => {
 
   return (
     <Router>
-      <NavBar />
+      {isLogged && <NavBar />}
 
       <PageContainer>
         <Routes>
