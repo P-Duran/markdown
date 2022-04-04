@@ -1,3 +1,5 @@
+import { Paths } from "./paths";
+
 type RouteType = {
   path: string;
   component: string;
@@ -14,12 +16,12 @@ export const initialRoutes: RouteType[] = [
 
 export const authRoutes: RouteType[] = [
   {
-    path: "/",
+    path: Paths.HOME,
     componentPath: "login",
     component: "Login",
   },
   {
-    path: "/register",
+    path: Paths.REGISTER,
     componentPath: "register",
     component: "Register",
   },
@@ -27,17 +29,17 @@ export const authRoutes: RouteType[] = [
 
 export const loggedRoutes: RouteType[] = [
   {
-    path: "/",
+    path: Paths.HOME,
     componentPath: "home",
     component: "Home",
   },
   {
-    path: "/dashboard",
+    path: Paths.DASHBOARD,
     componentPath: "dashboard",
     component: "Dashboard",
   },
   {
-    path: "/editor",
+    path: Paths.EDITOR,
     componentPath: "editor",
     component: "Editor",
   },

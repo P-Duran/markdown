@@ -19,6 +19,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { NavBarItem } from "./NavBarItem";
 import { menuItems } from "src/pages/menuItems";
+import { Paths } from "src/pages/paths";
 
 type SettingOption = {
   label: string;
@@ -41,7 +42,7 @@ export const NavBar = (): ReactElement => {
       icon: <LogoutIcon />,
       action: () =>
         logout()
-          .then(() => navigate("/"))
+          .then(() => navigate(Paths.HOME))
           .catch((err) =>
             enqueueSnackbar(err.response.data, {
               variant: "error",
@@ -80,7 +81,13 @@ export const NavBar = (): ReactElement => {
                 variant="h6"
                 noWrap
                 component="div"
-                sx={{ mr: 2, display: "flex", alignItems: "center" }}
+                sx={{
+                  pr: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate(Paths.HOME)}
               >
                 MARKDOWN
               </Typography>

@@ -12,6 +12,7 @@ import { useSnackbar } from "notistack";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
+import { Paths } from "src/pages/paths";
 
 type SettingOption = {
   label: string;
@@ -32,7 +33,7 @@ export const UserOptions = () => {
       icon: <LogoutIcon />,
       action: () =>
         logout()
-          .then(() => navigate("/"))
+          .then(() => navigate(Paths.HOME))
           .catch((err) =>
             enqueueSnackbar(err.response.data, {
               variant: "error",
