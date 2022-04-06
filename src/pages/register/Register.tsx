@@ -1,11 +1,10 @@
-import { Grid } from "@mui/material";
-
 import KeyIcon from "@mui/icons-material/Key";
 import { FieldForm } from "src/components/form/FIeldForm";
 import { register } from "src/api/authentication";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Paths } from "../paths";
 
 export const Register = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -27,7 +26,7 @@ export const Register = () => {
                 variant: "success",
                 preventDuplicate: true,
               });
-              navigate("/login");
+              navigate(Paths.HOME);
             })
             .catch((err) =>
               enqueueSnackbar(err.response.data, {

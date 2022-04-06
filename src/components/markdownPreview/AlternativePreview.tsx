@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import ClearIcon from "@mui/icons-material/Clear";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useNavigate } from "react-router-dom";
+import { Paths } from "src/pages/paths";
 
 export const AlternativePreview = (props: any) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export const AlternativePreview = (props: any) => {
       <motion.div
         onClick={(e) => {
           e.stopPropagation();
-          navigate("/editor");
+          navigate(Paths.EDITOR);
         }}
         style={{
           border: "2px #f0f0f3 solid",
@@ -95,12 +96,21 @@ export const AlternativePreview = (props: any) => {
             </Box>
           </Box>
           <Container
-            sx={{ height: 120, pt: 2, borderBottom: "2px #f0f0f3 solid" }}
+            sx={{ height: 120, py: 2, borderBottom: "2px #f0f0f3 solid" }}
           >
             <Typography fontWeight="bold">{"Markdown "}</Typography>
             <Typography variant="subtitle2">Un markdown mazo chulo</Typography>
           </Container>
-          <Box sx={{ height: 80 }} />
+          <Container sx={{ height: 80, py: 1 }}>
+            <Stack spacing={1} direction="row">
+              <Typography variant="caption" fontWeight="bold">
+                Edited:
+              </Typography>
+              <Typography variant="caption">
+                {new Date().toLocaleString()}
+              </Typography>
+            </Stack>
+          </Container>
         </Stack>
       </motion.div>
     </Grid>
