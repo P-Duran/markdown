@@ -14,7 +14,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "src/pages/paths";
 
-export const AlternativePreview = (props: any) => {
+export const MarkdownWorkspace = (props: any) => {
   const navigate = useNavigate();
 
   return (
