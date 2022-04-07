@@ -71,7 +71,7 @@ export const theme = createTheme({
         style: {
           backgroundColor: "#d9d9d9",
           color: "#e96900",
-          fontSize: "85%"
+          fontSize: "85%",
         },
       },
       bold: {

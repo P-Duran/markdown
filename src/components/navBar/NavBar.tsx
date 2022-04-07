@@ -66,7 +66,7 @@ export const NavBar = (): ReactElement => {
         position="sticky"
         sx={{
           backgroundColor: colors.white,
-          borderBottom: "2px #ebecee solid",
+          borderBottom: "1px #ebecee solid",
           color: "black",
         }}
         elevation={0}
