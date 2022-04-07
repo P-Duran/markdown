@@ -14,5 +14,12 @@ export const es = {
     "homeView.description":
       "Construye de una manera ágil y sencilla páginas web con Markdown",
     "homeView.returnHome": "Volver al Inicio",
+
+    // Actions labels
+    "action.save": "Guardar",
+
+    // Markdown Form labels
+    "markdown.save.title": "Guardar Markdown",
+    "markdown.save.description": "Crea páginas de manera sencilla",
   },
 };

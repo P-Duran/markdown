@@ -14,5 +14,12 @@ export const en = {
     "homeView.description":
       "Build web pages with Markdown in an agile and simple way",
     "homeView.returnHome": "Return Home",
+
+    // Actions
+    "action.save": "Save",
+
+    // Markdown Form labels
+    "markdown.save.title": "Save Markdown",
+    "markdown.save.description": "Create pages easily",
   },
 };

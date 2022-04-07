@@ -15,6 +15,7 @@ import { colors } from "src/styles/colorPalette";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
 import { useAuth } from "src/contexts/AuthContext";
+import { useNavbar } from "src/contexts/NavbarContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { NavBarItem } from "./NavBarItem";
@@ -32,6 +33,7 @@ export const NavBar = (): ReactElement => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const { currentUser, logout } = useAuth();
+  const { component } = useNavbar();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -97,7 +99,9 @@ export const NavBar = (): ReactElement => {
               ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0, display: "flex", gap: "20px" }}>
+              {component ?? <></>}
+
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
