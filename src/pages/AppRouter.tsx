@@ -16,25 +16,26 @@ export const AppRouter = (): ReactElement => {
 
   return (
     <Router>
-      {isLogged && <NavBar />}
-      <PageContainer>
-        <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={
-                <LazyRoute
-                  componentPath={route.componentPath}
-                  componentName={route.component}
-                />
-              }
-            />
-          ))}
-          {/* TODO: Not Found Page */}
-          <Route path="*" element={<p>No existe esta ruta</p>} />
-        </Routes>
-      </PageContainer>
+      <NavBar>
+        <PageContainer>
+          <Routes>
+            {routes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={
+                  <LazyRoute
+                    componentPath={route.componentPath}
+                    componentName={route.component}
+                  />
+                }
+              />
+            ))}
+            {/* TODO: Not Found Page */}
+            <Route path="*" element={<p>No existe esta ruta</p>} />
+          </Routes>
+        </PageContainer>
+      </NavBar>
     </Router>
   );
 };

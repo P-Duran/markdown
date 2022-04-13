@@ -1,8 +1,4 @@
-import {
-  ListItemIcon,
-  MenuItem as MuiMenuItem,
-  Typography,
-} from "@mui/material";
+import { MenuItem as MuiMenuItem } from "@mui/material";
 import { motion } from "framer-motion";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
