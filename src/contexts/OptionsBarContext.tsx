@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 export interface OptionsBarProps {
-  children?: React.ReactNode[] | React.ReactNode;
+  children?: Record<string, React.ReactNode>;
 }
 
 export interface OptionsBarContext {

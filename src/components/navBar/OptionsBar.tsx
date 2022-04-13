@@ -28,9 +28,7 @@ export const OptionsBar = ({ children, visible }: Props) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Stack spacing={2} direction="row" alignItems="center">
-          {children}
-        </Stack>
+        {children && Object.values(children)}
       </Stack>
     </motion.div>
   );
