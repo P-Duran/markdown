@@ -6,12 +6,13 @@ import { MarkdownWorkspace } from "src/components/markdownWorkspace/MarkdownWork
 import { useOptionsBar } from "src/contexts/OptionsBarContext";
 import { markdownMock } from "src/mocks/markdownMocks";
 import { MenuOption } from "src/types/MenuButtonTypes";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export const Dashboard = (): ReactElement => {
   const { show, close } = useOptionsBar();
 
   const settingOptions: MenuOption[] = [
-    { label: "Name", action: () => undefined },
+    { label: "Name", action: () => undefined, icon: <ExpandLessIcon /> },
   ];
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export const Dashboard = (): ReactElement => {
           <Stack spacing={2} direction="row" alignItems="center">
             <MenuButton
               options={settingOptions}
+              itemSx={{ px: 1.5, py: 1 }}
               buttonRender={(handleMenuStateChange) => (
                 <ButtonBase
                   sx={{

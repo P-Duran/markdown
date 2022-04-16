@@ -3,6 +3,8 @@ import {
   Menu,
   MenuItem,
   MenuList,
+  SxProps,
+  Theme,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
@@ -13,12 +15,10 @@ interface Props {
   buttonRender: (
     handleMenuState: (target: HTMLElement) => void
   ) => React.ReactNode;
+  itemSx?: SxProps<Theme>;
 }
 
-export const MenuButton = ({
-  options,
-  buttonRender: componentRender,
-}: Props) => {
+export const MenuButton = ({ options, buttonRender, itemSx = {} }: Props) => {
   const [target, setTarget] = useState<null | HTMLElement>(null);
 
   const onClose = () => {
@@ -31,7 +31,7 @@ export const MenuButton = ({
 
   return (
     <>
-      {componentRender(handleMenuState)}
+      {buttonRender(handleMenuState)}
       {options && (
         <Menu
           sx={{ mt: "45px" }}
@@ -66,6 +66,7 @@ export const MenuButton = ({
                   px: 4,
                   borderBottom:
                     options.length - 1 !== i ? "2px #ebecee solid" : undefined,
+                  ...itemSx,
                 }}
                 onClick={() => {
                   setting.action();
