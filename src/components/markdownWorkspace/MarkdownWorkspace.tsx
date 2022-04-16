@@ -20,10 +20,7 @@ export const MarkdownWorkspace = (props: any) => {
   return (
     <Grid item sx={{ height: 300, width: 350 }}>
       <motion.div
-        onClick={(e) => {
-          e.stopPropagation();
-          navigate(Paths.EDITOR);
-        }}
+        onClick={() => navigate(Paths.EDITOR)}
         style={{
           border: "2px #f0f0f3 solid",
           backgroundColor: "#fefefe",
@@ -47,10 +44,10 @@ export const MarkdownWorkspace = (props: any) => {
             divider={<Divider orientation="vertical" flexItem />}
             sx={{ px: 1, height: 80, borderBottom: "2px #f0f0f3 solid" }}
           >
-            <IconButton>
+            <IconButton onClick={(e) => e.stopPropagation()}>
               <HelpOutlineIcon fontSize="small" />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={(e) => e.stopPropagation()}>
               <ClearIcon fontSize="small" />
             </IconButton>
           </Stack>

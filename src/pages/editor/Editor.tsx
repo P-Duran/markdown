@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from "react";
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { MarkdownEditor } from "../../components/editor/MarkdownEditor";
 import { MarkdownToolBar } from "../../components/editor/toolbar/MarkdownToolBar";
 import { MarkdownRender } from "../../components/render/MarkdownRender";
@@ -10,7 +10,7 @@ export const Editor = (): ReactElement => {
   const [text, setText] = useState("");
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ p: 2 }}>
       <Grid item sm={6}>
         <MarkdownEditor>
           <MarkdownToolBar editorActions={editorActions} />
@@ -22,7 +22,17 @@ export const Editor = (): ReactElement => {
         </MarkdownEditor>
       </Grid>
       <Grid item sm={6}>
-        <MarkdownRender value={text} />
+        <Container
+          sx={{
+            backgroundColor: "white",
+            p: 5,
+            borderRadius: 3,
+            boxShadow: 1,
+            minHeight: "100%",
+          }}
+        >
+          <MarkdownRender value={text} />
+        </Container>
       </Grid>
     </Grid>
   );
