@@ -1,3 +1,4 @@
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import TuneIcon from "@mui/icons-material/Tune";
 import { ButtonBase, Grid, Stack, Typography } from "@mui/material";
 import { ReactElement, useEffect } from "react";
@@ -6,10 +7,9 @@ import { MarkdownWorkspace } from "src/components/markdownWorkspace/MarkdownWork
 import { useOptionsBar } from "src/contexts/OptionsBarContext";
 import { markdownMock } from "src/mocks/markdownMocks";
 import { MenuOption } from "src/types/MenuButtonTypes";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 export const Dashboard = (): ReactElement => {
-  const { show, close } = useOptionsBar();
+  const { show } = useOptionsBar();
 
   const settingOptions: MenuOption[] = [
     { label: "Name", action: () => undefined, icon: <ExpandLessIcon /> },
@@ -52,7 +52,11 @@ export const Dashboard = (): ReactElement => {
     <Stack sx={{ width: "100%" }}>
       <Grid container spacing={3} direction="row" sx={{ px: 3, py: 3 }}>
         {markdownMock.map((markdownValue, index) => (
-          <MarkdownWorkspace markdownValue={markdownValue} index={index} />
+          <MarkdownWorkspace
+            key={index}
+            markdownValue={markdownValue}
+            index={index}
+          />
         ))}
       </Grid>
     </Stack>

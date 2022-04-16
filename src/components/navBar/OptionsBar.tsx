@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import { motion } from "framer-motion";
+import React from "react";
 import { OptionsBarProps } from "src/contexts/OptionsBarContext";
 
 interface Props extends OptionsBarProps {
@@ -28,7 +29,10 @@ export const OptionsBar = ({ children, visible }: Props) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        {children && Object.values(children)}
+        {children &&
+          Object.values(children).map((child, i) => (
+            <React.Fragment key={i}>{child}</React.Fragment>
+          ))}
       </Stack>
     </motion.div>
   );

@@ -75,7 +75,9 @@ export const NavBar = ({ children }: Props): ReactElement => {
                 </Typography>
 
                 {menuItems.map((menuItem) => (
-                  <NavBarItem menuItem={menuItem} />
+                  <React.Fragment key={menuItem.path}>
+                    <NavBarItem menuItem={menuItem} />
+                  </React.Fragment>
                 ))}
               </Box>
               <UserOptions />
