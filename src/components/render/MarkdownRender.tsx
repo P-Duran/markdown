@@ -1,5 +1,5 @@
 import { Container, Box, CircularProgress } from "@mui/material";
-import { Suspense, useEffect, useState } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CodeBlockRender } from "./components/CodeBlockRender";

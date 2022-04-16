@@ -15,7 +15,7 @@ export const Auth = (): ReactElement => {
       }}
     >
       <HomeView />
-      <Grid item sm={6} sx={{ height: "100%", paddingTop: 5 }}>
+      <Grid item sm={6} sx={{ height: "100%", paddingTop: 5, backgroundColor: "white" }}>
         <Routes>
           {authRoutes.map((route) => (
             <Route
