@@ -90,7 +90,7 @@ export const NavBar = ({ children }: Props): ReactElement => {
         </AppBar>
       )}
       <OptionsBarContext.Provider
-        value={{ show: handleShow, close: handleClose }}
+        value={{ show: handleShow, close: handleClose, isOpen: visible }}
       >
         {children}
       </OptionsBarContext.Provider>

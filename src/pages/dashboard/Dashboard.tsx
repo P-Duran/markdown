@@ -1,15 +1,14 @@
+import AddIcon from "@mui/icons-material/Add";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import TuneIcon from "@mui/icons-material/Tune";
-import { alpha, Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { ReactElement, useEffect } from "react";
 import { MenuButton } from "src/components/buttons/MenuButton";
 import { SimpleButton } from "src/components/buttons/SimpleButton";
 import { MarkdownWorkspaceRender } from "src/components/markdownWorkspace/MarkdownWorkspace";
 import { useOptionsBar } from "src/contexts/OptionsBarContext";
-import { markdownMock } from "src/mocks/markdownMocks";
-import { MenuOption } from "src/types/MenuButtonTypes";
-import AddIcon from "@mui/icons-material/Add";
 import { useMarkdownWorkspace } from "src/hooks/useMarkdownWorkspace";
+import { MenuOption } from "src/types/MenuButtonTypes";
 
 export const Dashboard = (): ReactElement => {
   const { show } = useOptionsBar();
@@ -38,7 +37,7 @@ export const Dashboard = (): ReactElement => {
               )}
             />
             <Typography variant="subtitle2">
-              {markdownMock.length} Codes in total
+              {workspaces.length} Markdowns in total
             </Typography>
           </Stack>
         ),
@@ -50,7 +49,7 @@ export const Dashboard = (): ReactElement => {
         ),
       },
     });
-  }, []);
+  }, [workspaces]);
 
   return (
     <Stack sx={{ width: "100%" }}>
