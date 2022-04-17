@@ -1,9 +1,12 @@
+import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   createMarkdownWorkspace,
   deleteMarkdownWorkspace,
   getAllMarkdownWorkspaces,
 } from "src/api/markdownWorkspace";
+import { FieldForm } from "src/components/form/FIeldForm";
+import { useModal } from "src/contexts/ModalContext";
 import {
   MarkdownWorkspace,
   MarkdownWorkspaceRequest,
@@ -11,6 +14,7 @@ import {
 
 export const useMarkdownWorkspace = () => {
   const [workspaces, setWorkspaces] = useState<MarkdownWorkspace[]>([]);
+  const { open, close } = useModal();
 
   useEffect(() => {
     getAllWorkspaces();
@@ -18,8 +22,25 @@ export const useMarkdownWorkspace = () => {
 
   const getAllWorkspaces = () => getAllMarkdownWorkspaces().then(setWorkspaces);
 
-  const createWorkspace = (request: MarkdownWorkspaceRequest) =>
-    createMarkdownWorkspace(request).then(getAllWorkspaces);
+  const createWorkspace = () => {
+    open({
+      components: (
+        <FieldForm
+          title=""
+          subtitle="Create Workspace"
+          submitText="Create"
+          fieldsData={[{ key: "name", label: "Name" }]}
+          onSubmit={(request) =>
+            createMarkdownWorkspace(
+              request as unknown as MarkdownWorkspaceRequest
+            )
+              .then(getAllWorkspaces)
+              .then(close)
+          }
+        />
+      ),
+    });
+  };
 
   const deleteWorkspace = (id: string) =>
     deleteMarkdownWorkspace(id).then(getAllWorkspaces);

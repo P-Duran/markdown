@@ -42,7 +42,7 @@ export const Dashboard = (): ReactElement => {
           </Stack>
         ),
         group2: (
-          <SimpleButton onClick={() => createWorkspace({ name: "Workspace" })}>
+          <SimpleButton onClick={createWorkspace}>
             New Markdown
             <AddIcon sx={{ marginLeft: 1 }} fontSize="small" />
           </SimpleButton>
