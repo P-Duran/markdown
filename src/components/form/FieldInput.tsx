@@ -28,9 +28,11 @@ interface Props {
   onChange?: (text: string) => void;
   onKeyDown?: (code: string) => void;
   error?: boolean;
+  autoFocus?: boolean;
 }
 
 export const FieldInput = ({
+  autoFocus = false,
   type,
   label,
   endAdornment,
@@ -40,13 +42,11 @@ export const FieldInput = ({
 }: Props) => {
   return (
     <FormControl variant="standard">
-      {/* <InputLabel shrink htmlFor="bootstrap-input">
-        {label}
-      </InputLabel> */}
       <BootstrapInput
         type={type}
         placeholder={label}
         endAdornment={endAdornment}
+        autoFocus={autoFocus}
         onChange={(e) => onChange && onChange(e.target.value)}
         style={error === undefined || error ? { border: "1px solid red" } : {}}
         onKeyDown={(e) => onKeyDown(e.code)}
