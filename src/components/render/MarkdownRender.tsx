@@ -1,12 +1,12 @@
-import { Container, Box, CircularProgress } from "@mui/material";
-import { ReactNode, Suspense, useEffect, useState } from "react";
+import { Box, CircularProgress, Container } from "@mui/material";
+import { Suspense, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CodeBlockRender } from "./components/CodeBlockRender";
+import { DividerComponent } from "./components/DividerComponent";
+import { HeaderComponent } from "./components/HeaderComponent";
 import { ImageComponent } from "./components/ImageComponent";
 import { TableComponent } from "./components/TableComponent";
-import { HeaderComponent } from "./components/HeaderComponent";
-import { DividerComponent } from "./components/DividerComponent";
 
 interface Props {
   value: string;

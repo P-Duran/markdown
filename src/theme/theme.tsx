@@ -1,6 +1,12 @@
 import { createTheme } from "@mui/material";
+import { colors } from "src/styles/colorPalette";
 
 export const theme = createTheme({
+  palette: {
+    primary: {
+      main: colors.primary,
+    },
+  },
   typography: {
     fontFamily:
       "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
@@ -42,7 +48,7 @@ export const theme = createTheme({
       height: "100%",
       minHeight: "calc(100vh - 110px)",
       borderRadius: 10,
-      paddingTop: 10
+      paddingTop: 10,
     },
     editable: {
       style: {
