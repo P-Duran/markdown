@@ -6,6 +6,8 @@ import {
   Container,
   Divider,
   IconButton,
+  Avatar,
+  alpha,
 } from "@mui/material";
 import { MarkdownRender } from "src/components/render/MarkdownRender";
 import { motion } from "framer-motion";
@@ -13,8 +15,15 @@ import ClearIcon from "@mui/icons-material/Clear";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "src/pages/paths";
+import { MarkdownWorkspace } from "src/types/MarkdownWorkspaceTypes";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
-export const MarkdownWorkspace = (props: any) => {
+interface Props {
+  workspace: MarkdownWorkspace;
+  onDelete: (id: string) => Promise<void>;
+}
+
+export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -47,7 +56,12 @@ export const MarkdownWorkspace = (props: any) => {
             <IconButton onClick={(e) => e.stopPropagation()}>
               <HelpOutlineIcon fontSize="small" />
             </IconButton>
-            <IconButton onClick={(e) => e.stopPropagation()}>
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(workspace._id);
+              }}
+            >
               <ClearIcon fontSize="small" />
             </IconButton>
           </Stack>
@@ -86,7 +100,7 @@ export const MarkdownWorkspace = (props: any) => {
                 }}
               >
                 <MarkdownRender
-                  value={props.markdownValue.slice(0, 200)}
+                  value={workspace.preview.slice(0, 200)}
                   preview={true}
                 />
               </Container>
@@ -95,17 +109,31 @@ export const MarkdownWorkspace = (props: any) => {
           <Container
             sx={{ height: 120, py: 2, borderBottom: "2px #f0f0f3 solid" }}
           >
-            <Typography fontWeight="bold">{"Markdown "}</Typography>
-            <Typography variant="subtitle2">Un markdown mazo chulo</Typography>
+            <Stack spacing={1}>
+              <Typography fontWeight="bold">{workspace.name}</Typography>
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Avatar
+                  sx={{
+                    backgroundColor: alpha("#1976d2", 0.2),
+                    height: 15,
+                    width: 15,
+                    p: 0.5,
+                  }}
+                >
+                  <InsertDriveFileIcon color="primary" sx={{ fontSize: 15 }} />
+                </Avatar>
+                <Typography variant="caption">
+                  {workspace.pages} Pages
+                </Typography>
+              </Stack>
+            </Stack>
           </Container>
           <Container sx={{ height: 80, py: 1 }}>
             <Stack spacing={1} direction="row">
               <Typography variant="caption" fontWeight="bold">
                 Edited:
               </Typography>
-              <Typography variant="caption">
-                {new Date().toLocaleString()}
-              </Typography>
+              <Typography variant="caption">{workspace.updatedAt}</Typography>
             </Stack>
           </Container>
         </Stack>
