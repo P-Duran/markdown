@@ -15,7 +15,7 @@ export const LoaderButton = ({
   onClick = () => Promise.resolve(undefined),
   label = "Button",
   backgroundColor = colors.primary,
-  delay = 500,
+  delay = 250,
   loading,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
