@@ -44,12 +44,13 @@ export const FieldForm = ({
           <Typography variant="h1">{title}</Typography>
           <Typography>{subtitle}</Typography>
         </Stack>
-        {fieldsData.map((data) => (
+        {fieldsData.map((data, i) => (
           <FieldInput
             key={data.key}
             label={data.label}
             type={data.type}
             endAdornment={data.endAdornment}
+            autoFocus={i === 0}
             onChange={(text) => handleOnChange(text, data)}
             onKeyDown={(code) => code === "Enter" && handleOnSubmitWithDelay()}
           />

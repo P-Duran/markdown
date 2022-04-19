@@ -7,12 +7,14 @@ export interface OptionsBarProps {
 export interface OptionsBarContext {
   show: (props: OptionsBarProps) => void;
   close: () => void;
+  isOpen: boolean;
 }
 
 export const initializeContext = (): OptionsBarContext => {
   return {
     show: () => {},
     close: () => {},
+    isOpen: false,
   };
 };
 
