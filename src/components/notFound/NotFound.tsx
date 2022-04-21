@@ -2,7 +2,6 @@ import { Grid, Typography } from "@mui/material";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { colors } from "src/styles/colorPalette";
 import { ReactComponent as NotFoundSvg } from "../../assets/svg/notFound.svg";
 import { LoaderButton } from "../buttons/LoaderButton";
 

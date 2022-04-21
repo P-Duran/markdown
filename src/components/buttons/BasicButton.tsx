@@ -17,7 +17,6 @@ export const BasicButton = ({
   style = {},
 }: Props) => {
   const variantStyle = useButtonVariantStyle(variant);
-  console.log(variantStyle, variant);
   return (
     <motion.div
       style={{
@@ -32,6 +31,7 @@ export const BasicButton = ({
           padding: 13,
           height: "100%",
           width: "100%",
+          borderRadius: variantStyle.borderRadius,
         }}
       >
         {children}

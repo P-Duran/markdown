@@ -1,15 +1,13 @@
-import { Container, Grid, Typography } from "@mui/material";
 import KeyIcon from "@mui/icons-material/Key";
+import { Container, Grid, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import { useSnackbar } from "notistack";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
+import { LoaderButton } from "src/components/buttons/LoaderButton";
 import { FieldForm } from "src/components/form/FIeldForm";
 import { useAuth } from "src/contexts/AuthContext";
-import { useSnackbar } from "notistack";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { LoaderButton } from "src/components/buttons/LoaderButton";
-import { colors } from "src/styles/colorPalette";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Paths } from "../paths";
 
 export const Login = () => {
