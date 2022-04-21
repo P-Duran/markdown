@@ -72,10 +72,12 @@ export const Login = () => {
             to="/register"
             style={{ textDecoration: "none", width: "100%" }}
           >
-            <LoaderButton
-              backgroundColor={colors.lightGreen}
-              label={t("login.createAccount")}
-            />
+            <LoaderButton variant="secondary">
+              <Typography
+                sx={{ color: "white" }}
+                children={t("login.createAccount")}
+              />
+            </LoaderButton>
           </Link>
         </Grid>
       </Container>

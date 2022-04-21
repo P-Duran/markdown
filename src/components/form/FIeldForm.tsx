@@ -55,11 +55,9 @@ export const FieldForm = ({
             onKeyDown={(code) => code === "Enter" && handleOnSubmitWithDelay()}
           />
         ))}
-        <LoaderButton
-          loading={isLoading}
-          label={submitText}
-          onClick={() => onSubmit(formData)}
-        />
+        <LoaderButton loading={isLoading} onClick={() => onSubmit(formData)}>
+          <Typography sx={{ color: "white" }} children={submitText} />
+        </LoaderButton>
       </Stack>
     </Container>
   );

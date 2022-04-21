@@ -1,5 +1,5 @@
 import { Dialog, DialogContent } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ModalContext, ModalContextProps } from "src/contexts/ModalContext";
 
 interface Props {
@@ -10,20 +10,30 @@ export const ModalProvider = ({ children }: Props) => {
   const [open, setOpen] = useState(false);
   const [modalProps, setModalProps] = useState<ModalContextProps | undefined>();
 
-  const show = (props: ModalContextProps) => {
+  const show = useCallback((props: ModalContextProps) => {
     setModalProps(props);
     setOpen(true);
-  };
+  }, []);
 
-  const close = () => {
+  const close = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
+
+  const modalContext = useMemo(() => {
+    return { open: show, close: close, isOpen: open };
+  }, [show, close, open]);
 
   return (
-    <ModalContext.Provider value={{ open: show, close: close, isOpen: open }}>
+    <ModalContext.Provider value={modalContext}>
       {children}
-      <Dialog open={open} onClose={close}>
-        <DialogContent>{modalProps?.components}</DialogContent>
+      <Dialog
+        open={open}
+        onClose={close}
+        PaperProps={{
+          style: { borderRadius: 25 },
+        }}
+      >
+        <DialogContent sx={{ p: 5 }}>{modalProps?.components}</DialogContent>
       </Dialog>
     </ModalContext.Provider>
   );

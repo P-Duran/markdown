@@ -1,26 +1,26 @@
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import {
+  alpha,
+  Avatar,
   Box,
-  Grid,
-  Stack,
-  Typography,
   Container,
   Divider,
+  Grid,
   IconButton,
-  Avatar,
-  alpha,
+  Stack,
+  Typography,
 } from "@mui/material";
-import { MarkdownRender } from "src/components/render/MarkdownRender";
 import { motion } from "framer-motion";
-import ClearIcon from "@mui/icons-material/Clear";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import { useNavigate } from "react-router-dom";
+import { MarkdownRender } from "src/components/render/MarkdownRender";
 import { Paths } from "src/pages/paths";
 import { MarkdownWorkspace } from "src/types/MarkdownWorkspaceTypes";
-import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 
 interface Props {
   workspace: MarkdownWorkspace;
-  onDelete: (id: string) => Promise<void>;
+  onDelete: (id: string) => void;
 }
 
 export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
@@ -53,7 +53,11 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
             divider={<Divider orientation="vertical" flexItem />}
             sx={{ px: 1, height: 80, borderBottom: "2px #f0f0f3 solid" }}
           >
-            <IconButton onClick={(e) => e.stopPropagation()}>
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <HelpOutlineIcon fontSize="small" />
             </IconButton>
             <IconButton
@@ -62,7 +66,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                 onDelete(workspace._id);
               }}
             >
-              <ClearIcon fontSize="small" />
+              <DeleteOutlineIcon fontSize="small" />
             </IconButton>
           </Stack>
           <Box

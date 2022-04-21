@@ -10,14 +10,14 @@ import { useOptionsBar } from "src/contexts/OptionsBarContext";
 import { useMarkdownWorkspace } from "src/hooks/useMarkdownWorkspace";
 import { MenuOption } from "src/types/MenuButtonTypes";
 
+const settingOptions: MenuOption[] = [
+  { label: "Name", action: () => undefined, icon: <ExpandLessIcon /> },
+];
+
 export const Dashboard = (): ReactElement => {
   const { show } = useOptionsBar();
   const { workspaces, createWorkspace, deleteWorkspace } =
     useMarkdownWorkspace();
-
-  const settingOptions: MenuOption[] = [
-    { label: "Name", action: () => undefined, icon: <ExpandLessIcon /> },
-  ];
 
   useEffect(() => {
     show({
@@ -42,19 +42,22 @@ export const Dashboard = (): ReactElement => {
           </Stack>
         ),
         group2: (
-          <SimpleButton onClick={createWorkspace} sx={{color: "white", backgroundColor: "primary.main"}}>
+          <SimpleButton
+            onClick={createWorkspace}
+            sx={{ color: "white", backgroundColor: "primary.main" }}
+          >
             New Markdown
             <AddIcon sx={{ marginLeft: 1 }} fontSize="small" />
           </SimpleButton>
         ),
       },
     });
-  }, [workspaces]);
+  }, [createWorkspace, show, workspaces.length]);
 
   return (
     <Stack sx={{ width: "100%" }}>
       <Grid container spacing={3} direction="row" sx={{ px: 3, py: 3 }}>
-        {workspaces.map((ws, index) => (
+        {workspaces.map((ws) => (
           <MarkdownWorkspaceRender
             key={ws._id}
             workspace={ws}

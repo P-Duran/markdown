@@ -6,7 +6,6 @@ type Props = React.DetailedHTMLProps<
 >;
 
 export const ImageComponent = (props: Props) => {
-  console.log(props);
   return (
     <div
       style={{

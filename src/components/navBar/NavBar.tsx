@@ -3,7 +3,13 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "src/contexts/AuthContext";
 import {
@@ -32,14 +38,18 @@ export const NavBar = ({ children }: Props): ReactElement => {
     setOptionsBarProps(undefined);
   }, [location.pathname]);
 
-  const handleShow = (props: OptionsBarProps) => {
+  const handleShow = useCallback((props: OptionsBarProps) => {
     setVisible(true);
     setOptionsBarProps(props);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setVisible(false);
-  };
+  }, []);
+
+  const optionsBarContext = useMemo(() => {
+    return { show: handleShow, close: handleClose, isOpen: visible };
+  }, [handleClose, handleShow, visible]);
 
   return (
     <>
@@ -89,9 +99,7 @@ export const NavBar = ({ children }: Props): ReactElement => {
           </Container>
         </AppBar>
       )}
-      <OptionsBarContext.Provider
-        value={{ show: handleShow, close: handleClose, isOpen: visible }}
-      >
+      <OptionsBarContext.Provider value={optionsBarContext}>
         {children}
       </OptionsBarContext.Provider>
     </>

@@ -6,6 +6,12 @@ export const theme = createTheme({
     primary: {
       main: colors.primary,
     },
+    secondary: {
+      main: colors.lightGreen,
+    },
+    error: {
+      main: colors.error,
+    },
   },
   typography: {
     fontFamily:

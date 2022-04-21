@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }: Props) => {
 
   const getCurrentUserFunction = () => getCurrentUser().then(setCurrentUser);
 
-  console.log(currentUser);
   return (
     <AuthContext.Provider
       value={{

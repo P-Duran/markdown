@@ -25,10 +25,12 @@ export const NotFound = (): ReactElement => {
       <Typography variant="h2">No existe esta página</Typography>
       <NotFoundSvg width="100%" />
       <Link to="/" style={{ textDecoration: "none", width: "60%" }}>
-        <LoaderButton
-          backgroundColor={colors.primary}
-          label={t("homeView.returnHome")}
-        />
+        <LoaderButton variant="primary">
+          <Typography
+            sx={{ color: "white" }}
+            children={t("homeView.returnHome")}
+          />
+        </LoaderButton>
       </Link>
     </Grid>
   );
