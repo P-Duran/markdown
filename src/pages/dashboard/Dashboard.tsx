@@ -27,10 +27,8 @@ export const Dashboard = (): ReactElement => {
             <MenuButton
               options={settingOptions}
               itemSx={{ px: 1.5, py: 1 }}
-              buttonRender={(handleMenuStateChange) => (
-                <SimpleButton
-                  onClick={(e) => handleMenuStateChange(e.currentTarget)}
-                >
+              buttonRender={({ onOpen }) => (
+                <SimpleButton onClick={(e) => onOpen(e.currentTarget)}>
                   <TuneIcon fontSize="small" sx={{ pr: 1 }} />
                   <Typography variant="subtitle2">Sort</Typography>
                 </SimpleButton>

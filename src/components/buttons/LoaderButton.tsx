@@ -1,6 +1,7 @@
 import { CircularProgress, Typography } from "@mui/material";
 import { MotionStyle } from "framer-motion";
 import { useState } from "react";
+import { useButtonVariantStyle } from "src/hooks/useButtonVariantStyle";
 import { ButtonVariant } from "src/types/ButtonTypes";
 import { BasicButton } from "./BasicButton";
 
@@ -22,6 +23,7 @@ export const LoaderButton = ({
   children = <Typography>{"Button"}</Typography>,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const buttonStyle = useButtonVariantStyle(variant);
 
   return (
     <BasicButton
@@ -35,7 +37,7 @@ export const LoaderButton = ({
       }}
     >
       {loading || isLoading ? (
-        <CircularProgress style={{ color: "white" }} size={25} />
+        <CircularProgress sx={{ color: buttonStyle.color }} size={25} />
       ) : (
         children
       )}
