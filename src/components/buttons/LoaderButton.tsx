@@ -6,7 +6,7 @@ import { ButtonVariant } from "src/types/ButtonTypes";
 import { BasicButton } from "./BasicButton";
 
 interface Props {
-  onClick?: () => Promise<void>;
+  onClick?: () => Promise<any>;
   variant?: ButtonVariant;
   delay?: number;
   loading?: boolean;

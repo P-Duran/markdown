@@ -31,7 +31,7 @@ export const PopupMenu = ({ options, children, itemSx = {} }: Props) => {
   };
   const isTargetCOnfiguration = target && "x" in target;
 
-  console.log(target);
+  console.log(options);
   return (
     <>
       {children && children({ onClose, onOpen })}

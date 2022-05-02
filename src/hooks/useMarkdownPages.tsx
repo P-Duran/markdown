@@ -1,15 +1,79 @@
-import { useState } from "react";
+import { useSnackbar } from "notistack";
+import { useCallback, useEffect, useState } from "react";
+import {
+  createMarkdownPage,
+  deleteMarkdownPage,
+  getAllMarkdownPages,
+  updateMarkdownPage,
+} from "src/api/markdownPage";
+import {
+  MarkdownPage,
+  MarkdownPageRequest,
+  MarkdownPageUpdateRequest,
+} from "src/types/MarkdownPageTypes";
 
-export const useMarkdownPages = () => {
-  const [pages, setPages] = useState<string[]>([]);
+export const useMarkdownPages = (workspaceId: string, preload = true) => {
+  const { enqueueSnackbar } = useSnackbar();
 
-  const reloadPages = () => Promise.resolve(pages);
+  const [pages, setPages] = useState<MarkdownPage[]>([]);
 
-  const addPage = (name: string) =>
-    Promise.resolve(setPages((old) => [...old, name]));
+  const getAllPages = useCallback(
+    () =>
+      getAllMarkdownPages(workspaceId)
+        .then(setPages)
+        .catch((err) =>
+          enqueueSnackbar(err.response.data, {
+            variant: "error",
+            preventDuplicate: true,
+          })
+        ),
+    [enqueueSnackbar, workspaceId]
+  );
 
-  const removePage = (name: string) =>
-    Promise.resolve(setPages((old) => old.filter((n) => n !== name)));
+  const addPage = useCallback(
+    (request: MarkdownPageRequest) =>
+      createMarkdownPage(request)
+        .then(getAllPages)
+        .catch((err) =>
+          enqueueSnackbar(err.response.data, {
+            variant: "error",
+            preventDuplicate: true,
+          })
+        ),
+    [enqueueSnackbar, getAllPages]
+  );
 
-  return { pages, reloadPages, addPage, removePage };
+  const removePage = useCallback(
+    (id: string) =>
+      deleteMarkdownPage(id)
+        .then(getAllPages)
+        .catch((err) =>
+          enqueueSnackbar(err.response.data, {
+            variant: "error",
+            preventDuplicate: true,
+          })
+        ),
+    [enqueueSnackbar, getAllPages]
+  );
+
+  const updatePage = useCallback(
+    (request: MarkdownPageUpdateRequest) =>
+      updateMarkdownPage(request)
+        .then(getAllPages)
+        .catch((err) =>
+          enqueueSnackbar(err.response.data, {
+            variant: "error",
+            preventDuplicate: true,
+          })
+        ),
+    [enqueueSnackbar, getAllPages]
+  );
+
+  useEffect(() => {
+    if (preload) {
+      getAllPages();
+    }
+  }, [getAllPages, preload]);
+
+  return { pages, getAllPages, addPage, removePage, updatePage };
 };

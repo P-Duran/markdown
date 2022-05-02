@@ -10,9 +10,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { LoaderButton } from "src/components/buttons/LoaderButton";
 import { ContextMenu } from "src/components/menus/ContextMenu";
 import { useMarkdownPages } from "src/hooks/useMarkdownPages";
+import { useQuery } from "src/hooks/useQuery";
+import { Paths } from "../paths";
 
 const drawerWidth = 250;
 
@@ -21,8 +24,13 @@ interface Props {
 }
 
 export const ResponsiveDrawer = ({ children }: Props) => {
-  const { pages, addPage, removePage } = useMarkdownPages();
+  const navigate = useNavigate();
+  const query = useQuery();
+  const { pages, addPage, removePage } = useMarkdownPages(
+    query.get("workspace") ?? ""
+  );
 
+  console.log(query);
   return (
     <Box sx={{ display: "flex", width: "100%", p: 1 }}>
       <CssBaseline />
@@ -43,24 +51,43 @@ export const ResponsiveDrawer = ({ children }: Props) => {
         <Box sx={{ overflow: "auto" }}>
           <List>
             {[
-              ...pages.map((text, index) => (
+              ...pages.map((page, index) => (
                 <ContextMenu
                   options={[
-                    { label: "Remove", action: () => removePage(text) },
+                    { label: "Remove", action: () => removePage(page._id) },
                   ]}
                 >
-                  <ListItem button key={text}>
+                  <ListItem
+                    button
+                    key={page._id}
+                    onClick={() =>
+                      navigate({
+                        pathname: Paths.EDITOR,
+                        search:
+                          "?workspace=" +
+                          (query.get("workspace") ?? "") +
+                          "&page=" +
+                          page._id,
+                      })
+                    }
+                  >
                     <ListItemIcon>
                       {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
-                    <ListItemText primary={text} />
+                    <ListItemText primary={page.title} />
                   </ListItem>
                 </ContextMenu>
               )),
               <ListItem sx={{ justifyContent: "center" }}>
                 <LoaderButton
                   variant="border"
-                  onClick={() => addPage("Page " + pages.length)}
+                  onClick={() =>
+                    addPage({
+                      title: "Page",
+                      text: "",
+                      markdown: query.get("workspace") ?? "",
+                    })
+                  }
                   style={{ minWidth: 130 }}
                 >
                   <AddIcon />

@@ -1,5 +1,9 @@
 import { Divider, Grid } from "@mui/material";
-import React from "react";
+import { ContentState, EditorState } from "draft-js";
+import React, { useEffect, useMemo, useState } from "react";
+import { useMarkdownEditor } from "src/contexts/MarkdownEditorContext";
+import { useMarkdownPages } from "src/hooks/useMarkdownPages";
+import { useQuery } from "src/hooks/useQuery";
 import { EditorAction } from "src/types/EditorTypes";
 import { EditorActionButton } from "./EditorActionButton";
 
@@ -8,6 +12,24 @@ interface Props {
 }
 
 export const MarkdownToolBar = ({ editorActions }: Props) => {
+  const query = useQuery();
+  const { pages } = useMarkdownPages(query.get("workspace") ?? "");
+  const { setEditorState } = useMarkdownEditor();
+
+  const currentPage = useMemo(
+    () => pages.find((page) => page._id === query.get("page")),
+    [pages, query]
+  );
+
+  useEffect(() => {
+    console.log(currentPage);
+    setEditorState(
+      EditorState.createWithContent(
+        ContentState.createFromText(currentPage?.text ?? "")
+      )
+    );
+  }, [currentPage, setEditorState]);
+
   return (
     <>
       <Grid

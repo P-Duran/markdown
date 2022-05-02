@@ -1,10 +1,10 @@
-import React, { ReactElement, useState } from "react";
 import { Container, Grid } from "@mui/material";
+import React, { ReactElement, useState } from "react";
+import { Editable } from "src/components/editor/Editable";
 import { MarkdownEditor } from "../../components/editor/MarkdownEditor";
 import { MarkdownToolBar } from "../../components/editor/toolbar/MarkdownToolBar";
 import { MarkdownRender } from "../../components/render/MarkdownRender";
 import { editorActions } from "../../utils/EditorUtils";
-import { Editable } from "src/components/editor/Editable";
 import { ResponsiveDrawer } from "./ResponsiveDrawer";
 
 export const Editor = (): ReactElement => {

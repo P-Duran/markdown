@@ -29,7 +29,12 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
   return (
     <Grid item sx={{ height: 300, width: 350 }}>
       <motion.div
-        onClick={() => navigate(Paths.EDITOR)}
+        onClick={() =>
+          navigate({
+            pathname: Paths.EDITOR,
+            search: "?workspace=" + workspace._id,
+          })
+        }
         style={{
           border: "2px #f0f0f3 solid",
           backgroundColor: "#fefefe",
