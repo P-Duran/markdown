@@ -13,10 +13,10 @@ type Props = {
 export const NavBarItem = ({ menuItem }: Props): ReactElement => {
   const [t] = useTranslation();
   const navigate = useNavigate();
-
   const isActive = useNavigationParams(menuItem.path);
 
-  return (
+  return (isActive && menuItem.visibilty === "selected") ||
+    menuItem.visibilty !== "selected" ? (
     <MuiMenuItem
       key={menuItem.label}
       sx={{
@@ -38,5 +38,7 @@ export const NavBarItem = ({ menuItem }: Props): ReactElement => {
         {t(menuItem.label)}
       </motion.div>
     </MuiMenuItem>
+  ) : (
+    <></>
   );
 };

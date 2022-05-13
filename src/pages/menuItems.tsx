@@ -10,6 +10,7 @@ export type MenuItem = {
   path: Paths;
   icon: ReactElement;
   iconColor: string;
+  visibilty?: "always" | "selected";
 };
 
 export const menuItems: MenuItem[] = [
@@ -30,5 +31,6 @@ export const menuItems: MenuItem[] = [
     path: Paths.EDITOR,
     icon: <AutoFixHighRoundedIcon />,
     iconColor: colors.lightPurple,
+    visibilty: "selected"
   },
 ];

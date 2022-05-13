@@ -1,6 +1,6 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import PreviewIcon from "@mui/icons-material/Preview";
 import {
   alpha,
   Avatar,
@@ -10,7 +10,7 @@ import {
   Grid,
   IconButton,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -63,7 +63,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                 e.stopPropagation();
               }}
             >
-              <HelpOutlineIcon fontSize="small" />
+              <PreviewIcon fontSize="small" />
             </IconButton>
             <IconButton
               onClick={(e) => {
@@ -98,7 +98,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                 left: "-13%",
                 pointerEvents: "none",
                 userSelect: "none",
-                width: 400
+                width: 400,
               }}
             >
               <Container

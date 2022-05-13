@@ -11,7 +11,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import { LoaderButton } from "src/components/buttons/LoaderButton";
 import { ContextMenu } from "src/components/menus/ContextMenu";
-import { useModal } from "src/contexts/ModalContext";
 import { useMarkdownPages } from "src/hooks/useMarkdownPages";
 import { useQuery } from "src/hooks/useQuery";
 import { Paths } from "../paths";
@@ -53,6 +52,7 @@ export const LateralMenu = () => {
                   button
                   key={page._id}
                   sx={{
+                    my: 0.5,
                     borderRadius: 4,
                     backgroundColor:
                       page._id === query.get("page")
