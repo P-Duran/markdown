@@ -6,15 +6,16 @@ import {
   getAllMarkdownPages,
   updateMarkdownPage,
 } from "src/api/markdownPage";
+import { FieldForm } from "src/components/form/FIeldForm";
+import { useModal } from "src/contexts/ModalContext";
 import {
   MarkdownPage,
-  MarkdownPageRequest,
   MarkdownPageUpdateRequest,
 } from "src/types/MarkdownPageTypes";
 
 export const useMarkdownPages = (workspaceId: string, preload = true) => {
   const { enqueueSnackbar } = useSnackbar();
-
+  const { open, close } = useModal();
   const [pages, setPages] = useState<MarkdownPage[]>([]);
 
   const getAllPages = useCallback(
@@ -31,16 +32,33 @@ export const useMarkdownPages = (workspaceId: string, preload = true) => {
   );
 
   const addPage = useCallback(
-    (request: MarkdownPageRequest) =>
-      createMarkdownPage(request)
-        .then(getAllPages)
-        .catch((err) =>
-          enqueueSnackbar(err.response.data, {
-            variant: "error",
-            preventDuplicate: true,
-          })
+    () =>
+      open({
+        components: (
+          <FieldForm
+            title=""
+            subtitle="Create Workspace Page"
+            submitText="Create"
+            fieldsData={[{ key: "title", label: "Title" }]}
+            onSubmit={(request) =>
+              createMarkdownPage({
+                title: request["title"],
+                text: "",
+                markdown: workspaceId,
+              })
+                .then(getAllPages)
+                .catch((err) =>
+                  enqueueSnackbar(err.response.data, {
+                    variant: "error",
+                    preventDuplicate: true,
+                  })
+                )
+                .then(close)
+            }
+          />
         ),
-    [enqueueSnackbar, getAllPages]
+      }),
+    [close, enqueueSnackbar, getAllPages, open, workspaceId]
   );
 
   const removePage = useCallback(

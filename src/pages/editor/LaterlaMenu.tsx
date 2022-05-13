@@ -11,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useNavigate } from "react-router-dom";
 import { LoaderButton } from "src/components/buttons/LoaderButton";
 import { ContextMenu } from "src/components/menus/ContextMenu";
-import { useCurrentPage } from "src/hooks/useCurrentPage";
+import { useModal } from "src/contexts/ModalContext";
 import { useMarkdownPages } from "src/hooks/useMarkdownPages";
 import { useQuery } from "src/hooks/useQuery";
 import { Paths } from "../paths";
@@ -24,7 +24,6 @@ export const LateralMenu = () => {
   const { pages, addPage, removePage } = useMarkdownPages(
     query.get("workspace") ?? ""
   );
-  const { currentPage } = useCurrentPage();
 
   return (
     <Drawer
@@ -41,7 +40,7 @@ export const LateralMenu = () => {
         },
       }}
     >
-      <Box sx={{ overflow: "auto" }}>
+      <Box sx={{ overflow: "auto", px: 1 }}>
         <List>
           {[
             ...pages.map((page, index) => (
@@ -53,10 +52,11 @@ export const LateralMenu = () => {
                 <ListItem
                   button
                   key={page._id}
-                  style={{
-                    border:
-                      currentPage?._id === page._id
-                        ? "1px solid black"
+                  sx={{
+                    borderRadius: 4,
+                    backgroundColor:
+                      page._id === query.get("page")
+                        ? "primary.light"
                         : undefined,
                   }}
                   onClick={() =>
@@ -71,22 +71,38 @@ export const LateralMenu = () => {
                   }
                 >
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {index % 2 === 0 ? (
+                      <InboxIcon
+                        sx={{
+                          color:
+                            query.get("page") === page._id
+                              ? "white"
+                              : undefined,
+                        }}
+                      />
+                    ) : (
+                      <MailIcon />
+                    )}
                   </ListItemIcon>
-                  <ListItemText primary={page.title} />
+                  <ListItemText
+                    primary={
+                      <Typography
+                        sx={{
+                          color:
+                            query.get("page") === page._id ? "white" : "black",
+                        }}
+                      >
+                        {page.title}
+                      </Typography>
+                    }
+                  />
                 </ListItem>
               </ContextMenu>
             )),
             <ListItem sx={{ justifyContent: "center" }}>
               <LoaderButton
                 variant="border"
-                onClick={() =>
-                  addPage({
-                    title: "Page",
-                    text: "",
-                    markdown: query.get("workspace") ?? "",
-                  })
-                }
+                onClick={() => Promise.resolve().then(addPage)}
                 style={{ minWidth: 130 }}
               >
                 <AddIcon />

@@ -1,6 +1,8 @@
 import { Container, Grid } from "@mui/material";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { Editable } from "src/components/editor/Editable";
+import { usePageContent } from "src/hooks/usePageContent";
+import { useQuery } from "src/hooks/useQuery";
 import { MarkdownEditor } from "../../components/editor/MarkdownEditor";
 import { MarkdownToolBar } from "../../components/editor/toolbar/MarkdownToolBar";
 import { MarkdownRender } from "../../components/render/MarkdownRender";
@@ -8,17 +10,28 @@ import { editorActions } from "../../utils/EditorUtils";
 import { ResponsiveDrawer } from "./ResponsiveDrawer";
 
 export const Editor = (): ReactElement => {
-  const [text, setText] = useState("");
+  const [initialValue, setInitialValue] = useState("");
+  const query = useQuery();
+  const { content, setContent } = usePageContent(
+    query.get("workspace") ?? "",
+    query.get("page") ?? ""
+  );
+
+  console.log(query.get("page"));
+  useEffect(() => {
+    setInitialValue(content ?? "");
+    console.log(content);
+  }, [query.get("page")]);
 
   return (
     <ResponsiveDrawer>
       <Grid container spacing={2}>
         <Grid item sm={6}>
-          <MarkdownEditor>
+          <MarkdownEditor initialValue={initialValue}>
             <MarkdownToolBar editorActions={editorActions} />
             <Editable
               onChange={(state) => {
-                setText(state.getCurrentContent().getPlainText());
+                setContent(state.getCurrentContent().getPlainText());
               }}
             />
           </MarkdownEditor>
@@ -33,7 +46,7 @@ export const Editor = (): ReactElement => {
               minHeight: "100%",
             }}
           >
-            <MarkdownRender value={text} />
+            <MarkdownRender value={content ?? ""} />
           </Container>
         </Grid>
       </Grid>

@@ -95,14 +95,16 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                 height: "100%",
                 position: "relative",
                 top: "-70%",
+                left: "-13%",
                 pointerEvents: "none",
                 userSelect: "none",
+                width: 400
               }}
             >
               <Container
                 sx={{
-                  height: "300%",
-                  transform: "scale(0.5)",
+                  height: "250%",
+                  transform: "scale(0.4)",
                   backgroundColor: "white",
                   p: 5,
                   borderRadius: 3,

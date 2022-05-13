@@ -18,6 +18,7 @@ export const MarkdownRender = ({ value, preview }: Props) => {
       maxWidth="md"
       style={{
         color: "#24292e",
+        overflow: "clip",
       }}
     >
       <ReactMarkdown
