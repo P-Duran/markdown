@@ -10,18 +10,23 @@ import { editorActions } from "../../utils/EditorUtils";
 import { ResponsiveDrawer } from "./ResponsiveDrawer";
 
 export const Editor = (): ReactElement => {
-  const [initialValue, setInitialValue] = useState("");
+  const [initialValue, setInitialValue] = useState<string>();
   const query = useQuery();
+  const currentPage = query.get("page");
   const { content, setContent } = usePageContent(
     query.get("workspace") ?? "",
-    query.get("page") ?? ""
+    currentPage ?? ""
   );
 
-  console.log(query.get("page"));
   useEffect(() => {
-    setInitialValue(content ?? "");
-    console.log(content);
-  }, [query.get("page")]);
+    if (initialValue === undefined) {
+      setInitialValue(content ?? "");
+    }
+  }, [content, initialValue]);
+
+  useEffect(() => {
+    setInitialValue(undefined);
+  }, [currentPage]);
 
   return (
     <ResponsiveDrawer>
