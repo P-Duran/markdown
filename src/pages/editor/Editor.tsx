@@ -19,14 +19,16 @@ export const Editor = (): ReactElement => {
   );
 
   useEffect(() => {
-    if (initialValue === undefined) {
-      setInitialValue(content ?? "");
-    }
-  }, [content, initialValue]);
-
-  useEffect(() => {
+    console.log("reset initialValue");
     setInitialValue(undefined);
   }, [currentPage]);
+
+  useEffect(() => {
+    if (initialValue === undefined && !!query.get("page")) {
+      console.log("set InitialValue");
+      setInitialValue(content ?? "");
+    }
+  }, [content, initialValue, query]);
 
   return (
     <ResponsiveDrawer>
