@@ -1,22 +1,35 @@
-import { customCompositeDecorator } from "src/components/editor/decorators/CustomCompositeDecorator";
-import { useState } from "react";
-import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
-import { Editor, EditorState } from "draft-js";
 import { useTheme } from "@mui/material";
+import { ContentState, Editor, EditorState } from "draft-js";
+import { useCallback, useEffect, useState } from "react";
+import { customCompositeDecorator } from "src/components/editor/decorators/CustomCompositeDecorator";
+import { MarkdownEditorContext } from "src/contexts/MarkdownEditorContext";
 import { MarkdownEditorContainer } from "./MarkdownEditorContainer";
 interface Props {
+  initialValue?: string;
   children: React.ReactNode;
 }
 
-export const MarkdownEditor = ({ children }: Props) => {
+export const MarkdownEditor = ({ initialValue, children }: Props) => {
   const theme = useTheme();
 
   const [editorRef, setEditorRef] = useState<Editor | null>(null);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(
-      customCompositeDecorator(Object.values(theme.editor.syntaxHighlight))
-    )
+
+  const createContext = useCallback(
+    (value?: string) =>
+      EditorState.createWithContent(
+        ContentState.createFromText(value ?? ""),
+        customCompositeDecorator(Object.values(theme.editor.syntaxHighlight))
+      ),
+    [theme.editor.syntaxHighlight]
   );
+
+  const [editorState, setEditorState] = useState(() =>
+    createContext(initialValue)
+  );
+
+  useEffect(() => {
+    setEditorState(createContext(initialValue));
+  }, [createContext, initialValue]);
 
   return (
     <MarkdownEditorContext.Provider

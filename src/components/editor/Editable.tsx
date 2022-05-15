@@ -1,7 +1,6 @@
 import { Container, useTheme } from "@mui/material";
 import { Editor, EditorState } from "draft-js";
 import "draft-js/dist/Draft.css";
-import { useEffect } from "react";
 import { useMarkdownEditor } from "src/contexts/MarkdownEditorContext";
 import { replaceSelectedText } from "src/utils/EditorUtils";
 
@@ -16,11 +15,6 @@ export const Editable = ({ delay = 500, onChange = () => {} }: Props) => {
 
   const theme = useTheme();
 
-  useEffect(() => {
-    const timeOutId = setTimeout(() => onChange(editorState), delay);
-    return () => clearTimeout(timeOutId);
-  }, [editorState, onChange, delay]);
-
   return (
     <Container
       onClick={() => editorRef?.focus()}
@@ -34,6 +28,7 @@ export const Editable = ({ delay = 500, onChange = () => {} }: Props) => {
         }}
         onChange={(state) => {
           setEditorState(state);
+          onChange(state);
         }}
         ref={(draftEditor) => setEditorRef(draftEditor)}
       />

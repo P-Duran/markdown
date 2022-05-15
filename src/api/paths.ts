@@ -6,3 +6,5 @@ export const REGISTER_PATH = "register";
 export const CURRENT_USER_PATH = "/current-user";
 
 export const MARKDOWN_WORKSPACE_PATH = "/markdown"
+
+export const MARKDOWN_PAGE_PATH = "/page"

@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { NavBar } from "src/components/navBar/NavBar";
 import { PageContainer } from "src/components/pageContainer/PageContainer";
@@ -6,7 +6,7 @@ import { useAuth } from "src/contexts/AuthContext";
 import { LazyRoute } from "./LazyRoute";
 import { initialRoutes, loggedRoutes } from "./routes";
 
-export const AppRouter = (): ReactElement => {
+export const AppRouter = memo(() => {
   const { isLogged } = useAuth();
 
   const routes = useMemo(
@@ -38,4 +38,4 @@ export const AppRouter = (): ReactElement => {
       </NavBar>
     </Router>
   );
-};
+});

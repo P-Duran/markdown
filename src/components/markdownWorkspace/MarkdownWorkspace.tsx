@@ -1,6 +1,6 @@
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
+import PreviewIcon from "@mui/icons-material/Preview";
 import {
   alpha,
   Avatar,
@@ -10,7 +10,7 @@ import {
   Grid,
   IconButton,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,12 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
   return (
     <Grid item sx={{ height: 300, width: 350 }}>
       <motion.div
-        onClick={() => navigate(Paths.EDITOR)}
+        onClick={() =>
+          navigate({
+            pathname: Paths.EDITOR,
+            search: "?workspace=" + workspace._id,
+          })
+        }
         style={{
           border: "2px #f0f0f3 solid",
           backgroundColor: "#fefefe",
@@ -58,7 +63,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                 e.stopPropagation();
               }}
             >
-              <HelpOutlineIcon fontSize="small" />
+              <PreviewIcon fontSize="small" />
             </IconButton>
             <IconButton
               onClick={(e) => {
@@ -90,14 +95,16 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                 height: "100%",
                 position: "relative",
                 top: "-70%",
+                left: "-13%",
                 pointerEvents: "none",
                 userSelect: "none",
+                width: 400,
               }}
             >
               <Container
                 sx={{
-                  height: "300%",
-                  transform: "scale(0.5)",
+                  height: "250%",
+                  transform: "scale(0.4)",
                   backgroundColor: "white",
                   p: 5,
                   borderRadius: 3,
