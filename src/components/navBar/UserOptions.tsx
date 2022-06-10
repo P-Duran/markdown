@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "src/contexts/AuthContext";
 import { Paths } from "src/pages/paths";
 import { MenuOption } from "src/types/MenuButtonTypes";
+import { stringToColour } from "src/utils/ColorUtils";
 import { MenuButton } from "../buttons/MenuButton";
 
 export const UserOptions = () => {

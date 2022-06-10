@@ -19,14 +19,12 @@ export const Editor = (): ReactElement => {
   );
 
   useEffect(() => {
-    console.log("reset initialValue");
     setInitialValue(undefined);
   }, [currentPage]);
 
   useEffect(() => {
     if (initialValue === undefined && !!query.get("page")) {
-      console.log("set InitialValue");
-      setInitialValue(content ?? "");
+      setInitialValue(content);
     }
   }, [content, initialValue, query]);
 

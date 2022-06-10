@@ -1,6 +1,4 @@
 import AddIcon from "@mui/icons-material/Add";
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -8,12 +6,14 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import * as Icons from "@mui/icons-material/";
 import { useNavigate } from "react-router-dom";
 import { LoaderButton } from "src/components/buttons/LoaderButton";
 import { ContextMenu } from "src/components/menus/ContextMenu";
 import { useMarkdownPages } from "src/hooks/useMarkdownPages";
 import { useQuery } from "src/hooks/useQuery";
 import { Paths } from "../paths";
+import React from "react";
 
 const drawerWidth = 250;
 
@@ -44,13 +44,13 @@ export const LateralMenu = () => {
           {[
             ...pages.map((page, index) => (
               <ContextMenu
+                key={page._id}
                 options={[
                   { label: "Remove", action: () => removePage(page._id) },
                 ]}
               >
                 <ListItem
                   button
-                  key={page._id}
                   sx={{
                     my: 0.5,
                     borderRadius: 4,
@@ -71,18 +71,10 @@ export const LateralMenu = () => {
                   }
                 >
                   <ListItemIcon>
-                    {index % 2 === 0 ? (
-                      <InboxIcon
-                        sx={{
-                          color:
-                            query.get("page") === page._id
-                              ? "white"
-                              : undefined,
-                        }}
-                      />
-                    ) : (
-                      <MailIcon />
-                    )}
+                    {page.title in (Icons as any) &&
+                      (React.createElement(
+                        (Icons as any)[page.title as any]
+                      ) as any)}
                   </ListItemIcon>
                   <ListItemText
                     primary={
@@ -99,7 +91,7 @@ export const LateralMenu = () => {
                 </ListItem>
               </ContextMenu>
             )),
-            <ListItem sx={{ justifyContent: "center" }}>
+            <ListItem sx={{ justifyContent: "center" }} key={"add-button"}>
               <LoaderButton
                 variant="border"
                 onClick={() => Promise.resolve().then(addPage)}
