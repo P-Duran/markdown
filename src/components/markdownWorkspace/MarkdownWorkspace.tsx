@@ -125,7 +125,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
               <Stack direction="row" alignItems="center" spacing={0.5}>
                 <Avatar
                   sx={{
-                    backgroundColor: alpha("#1976d2", 0.2),
+                    backgroundColor: "primary.light",
                     height: 15,
                     width: 15,
                     p: 0.5,

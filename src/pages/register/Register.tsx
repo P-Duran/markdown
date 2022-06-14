@@ -41,7 +41,7 @@ export const Register = () => {
           {
             key: "password1",
             label: "Password",
-            type: showPass1 ? "text" : "password",
+            render: showPass1 ? "text" : "password",
             endAdornment: (
               <KeyIcon
                 sx={{ cursor: "pointer" }}
@@ -53,7 +53,7 @@ export const Register = () => {
           {
             key: "password2",
             label: "Repeat Password",
-            type: showPass2 ? "text" : "password",
+            render: showPass2 ? "text" : "password",
             endAdornment: (
               <KeyIcon
                 sx={{ cursor: "pointer" }}

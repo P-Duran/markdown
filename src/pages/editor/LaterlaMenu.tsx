@@ -70,19 +70,31 @@ export const LateralMenu = () => {
                     })
                   }
                 >
-                  <ListItemIcon>
-                    {page.title in (Icons as any) &&
+                  <ListItemIcon
+                    sx={{
+                      color:
+                        query.get("page") === page._id
+                          ? "primary.main"
+                          : "black",
+                    }}
+                  >
+                    {page.icon &&
+                      page.icon in (Icons as any) &&
                       (React.createElement(
-                        (Icons as any)[page.title as any]
+                        (Icons as any)[page.icon as any]
                       ) as any)}
                   </ListItemIcon>
                   <ListItemText
                     primary={
                       <Typography
-                        sx={{
-                          color:
-                            query.get("page") === page._id ? "white" : "black",
-                        }}
+                        sx={
+                          query.get("page") === page._id
+                            ? {
+                                fontWeight: 600,
+                                color: "primary.main",
+                              }
+                            : undefined
+                        }
                       >
                         {page.title}
                       </Typography>

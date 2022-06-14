@@ -1,10 +1,11 @@
-import { createTheme } from "@mui/material";
+import { alpha, createTheme } from "@mui/material";
 import { colors } from "src/styles/colorPalette";
 
 export const theme = createTheme({
   palette: {
     primary: {
       main: colors.primary,
+      light: alpha("#1976d2", 0.2),
     },
     secondary: {
       main: colors.lightGreen,
