@@ -16,9 +16,10 @@ export const ImageComponent = (props: Props) => {
     >
       <img
         {...props}
+        alt=""
         style={{
           maxWidth: "100%",
-          boxShadow: "0 5px 28px rgba(0, 0, 0, 0.3)",
+          //boxShadow: "0 5px 28px rgba(0, 0, 0, 0.3)",
           borderRadius: 10,
           marginTop: 20,
           marginBottom: 20,

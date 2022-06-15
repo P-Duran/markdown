@@ -1,5 +1,5 @@
 import { useSnackbar } from "notistack";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   createMarkdownPage,
   deleteMarkdownPage,
@@ -7,6 +7,7 @@ import {
   updateMarkdownPage,
 } from "src/api/markdownPage";
 import { FieldForm } from "src/components/form/FIeldForm";
+import { IconSelector } from "src/components/iconSelector/IconSelector";
 import { useModal } from "src/contexts/ModalContext";
 import {
   MarkdownPage,
@@ -39,11 +40,21 @@ export const useMarkdownPages = (workspaceId: string, preload = true) => {
             title=""
             subtitle="Create Workspace Page"
             submitText="Create"
-            fieldsData={[{ key: "title", label: "Title" }]}
+            fieldsData={[
+              { key: "title", label: "Title" },
+              {
+                key: "icon",
+                label: "Icon",
+                render: (handleOnChange) => (
+                  <IconSelector onChange={handleOnChange} />
+                ),
+              },
+            ]}
             onSubmit={(request) =>
               createMarkdownPage({
                 title: request["title"],
                 text: "",
+                icon: request["icon"],
                 markdown: workspaceId,
               })
                 .then(getAllPages)

@@ -43,4 +43,9 @@ export const loggedRoutes: RouteType[] = [
     componentPath: "editor",
     component: "Editor",
   },
+  {
+    path: Paths.PREVIEW,
+    componentPath: "preview",
+    component: "Preview",
+  },
 ];

@@ -38,7 +38,7 @@ export const Login = () => {
           {
             key: "password",
             label: "Password",
-            type: showPass ? "text" : "password",
+            render: showPass ? "text" : "password",
             endAdornment: (
               <motion.div
                 transition={{ duration: 0.5 }}

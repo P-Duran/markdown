@@ -10,7 +10,7 @@ import {
   Grid,
   IconButton,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -61,6 +61,9 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
             <IconButton
               onClick={(e) => {
                 e.stopPropagation();
+                navigate({
+                  pathname: Paths.PREVIEW.replace(":id", workspace._id),
+                });
               }}
             >
               <PreviewIcon fontSize="small" />
@@ -110,10 +113,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
                   borderRadius: 3,
                 }}
               >
-                <MarkdownRender
-                  value={workspace.preview.slice(0, 200)}
-                  preview={true}
-                />
+                <MarkdownRender value={workspace.preview.slice(0, 200)} />
               </Container>
             </Box>
           </Box>
@@ -125,7 +125,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
               <Stack direction="row" alignItems="center" spacing={0.5}>
                 <Avatar
                   sx={{
-                    backgroundColor: alpha("#1976d2", 0.2),
+                    backgroundColor: "primary.light",
                     height: 15,
                     width: 15,
                     p: 0.5,
