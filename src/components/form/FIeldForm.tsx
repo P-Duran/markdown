@@ -1,7 +1,9 @@
 import { Container, Stack, Typography } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import {
-  CustomRender, FormData, InputFieldData
+  CustomRender,
+  FormData,
+  InputFieldData,
 } from "src/types/FIeldFormTypes";
 import { LoaderButton } from "../buttons/LoaderButton";
 import { FieldInput } from "./FieldInput";
@@ -29,9 +31,12 @@ export const FieldForm = ({
   const handleOnChange = useCallback(
     (text: string, fieldData: InputFieldData) => {
       setFormData((prevState) => {
-        const newFormData = { ...prevState, [fieldData.key]: text };
-        onChange && onChange(newFormData);
-        return newFormData;
+        if (prevState[fieldData.key] !== text) {
+          const newFormData = { ...prevState, [fieldData.key]: text };
+          onChange && onChange(newFormData);
+          return newFormData;
+        }
+        return prevState;
       });
     },
     [onChange]
