@@ -1,11 +1,25 @@
+import { Box, CssBaseline } from "@mui/material";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { MarkdownRender } from "src/components/render/MarkdownRender";
 import { useMarkdownPages } from "src/hooks/useMarkdownPages";
-import { useMarkdownWorkspace } from "src/hooks/useMarkdownWorkspace";
+import { LateralMenu } from "./components/LateralMenu";
 
 export const Preview = () => {
-  const { id } = useParams();
-  const { pages } = useMarkdownPages(id ?? "");
-  console.log(pages, id);
-  return pages.map((page) => <MarkdownRender value={page.text} />);
+  const { markdownId, pageId } = useParams();
+  const { pages } = useMarkdownPages(markdownId ?? "");
+  const currentPage = useMemo(
+    () => pages.find((page) => page._id === pageId) ?? pages[0],
+    [pageId, pages]
+  );
+
+  return (
+    <Box sx={{ display: "flex", width: "100%", p: 1 }}>
+      <CssBaseline />
+      <LateralMenu />
+      <Box sx={{ flexGrow: 1 }}>
+        <MarkdownRender value={currentPage?.text ?? ""} delayMultiplier={0} />
+      </Box>
+    </Box>
+  );
 };

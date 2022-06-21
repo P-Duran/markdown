@@ -62,7 +62,10 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
               onClick={(e) => {
                 e.stopPropagation();
                 navigate({
-                  pathname: Paths.PREVIEW.replace(":id", workspace._id),
+                  pathname: Paths.PREVIEW.replace(
+                    ":markdownId",
+                    workspace._id
+                  ).replace(":pageId", "home"),
                 });
               }}
             >

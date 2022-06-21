@@ -17,7 +17,7 @@ import React from "react";
 
 const drawerWidth = 250;
 
-export const LateralMenu = () => {
+export const LateralPageEditorMenu = () => {
   const navigate = useNavigate();
   const query = useQuery();
   const { pages, addPage, removePage } = useMarkdownPages(

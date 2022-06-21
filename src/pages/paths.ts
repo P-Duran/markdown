@@ -3,5 +3,5 @@ export enum Paths {
   REGISTER = "/register",
   DASHBOARD = "/dashboard",
   EDITOR = "/editor",
-  PREVIEW = "/preview/:id",
+  PREVIEW = "/preview/:markdownId/:pageId",
 }

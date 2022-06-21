@@ -53,9 +53,7 @@ export const FieldInput = ({
       onChangeDelay
     );
     return () => clearTimeout(timeOutId);
-  }, [currentText, onChange, onChangeDelay]);
-
-  useEffect(() => {}, []);
+  }, [currentText, onChangeDelay]);
 
   return (
     <FormControl variant="standard">
