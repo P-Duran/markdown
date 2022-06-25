@@ -1,6 +1,21 @@
 import { Paths } from "./paths";
 
-type RouteType = {
+export type RouteType = ParentRoute | LeafRoute;
+
+export type ParentRoute = {
+  path: string;
+  childrens: RouteType[];
+};
+
+export type LeafRoute = LeafIndexRoute | LeafPathRoute;
+
+export type LeafIndexRoute = {
+  index: boolean;
+  component: string;
+  componentPath: string;
+};
+
+export type LeafPathRoute = {
   path: string;
   component: string;
   componentPath: string;
@@ -45,7 +60,18 @@ export const loggedRoutes: RouteType[] = [
   },
   {
     path: Paths.PREVIEW,
-    componentPath: "preview",
-    component: "Preview",
+    childrens: [
+      {
+        path: ":markdownId",
+        childrens: [
+          { index: true, componentPath: "preview", component: "Preview" },
+          {
+            path: ":pageId",
+            componentPath: "preview",
+            component: "Preview",
+          },
+        ],
+      },
+    ],
   },
 ];

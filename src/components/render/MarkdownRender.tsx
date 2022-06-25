@@ -9,18 +9,21 @@ import { TableComponent } from "./components/TableComponent";
 
 interface Props {
   value: string;
-  preview?: boolean;
+  delayMultiplier?: number;
 }
 
-export const MarkdownRender = ({ value }: Props) => {
+export const MarkdownRender = ({ value, delayMultiplier = 1 }: Props) => {
   const LazyLargeComponent = useMemo(
     () =>
       React.lazy(() => {
         return new Promise((resolve) =>
-          setTimeout(resolve, Math.max(value.length, 5000) / 10)
+          setTimeout(
+            resolve,
+            (Math.max(value.length, 5000) * delayMultiplier) / 10
+          )
         ).then(() => import("react-markdown"));
       }),
-    [value.length]
+    [delayMultiplier, value.length]
   );
 
   return (

@@ -55,8 +55,6 @@ export const FieldInput = ({
     return () => clearTimeout(timeOutId);
   }, [currentText, onChange, onChangeDelay]);
 
-  useEffect(() => {}, []);
-
   return (
     <FormControl variant="standard">
       <BootstrapInput
