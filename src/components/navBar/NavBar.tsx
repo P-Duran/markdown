@@ -53,7 +53,7 @@ export const NavBar = ({ children }: Props): ReactElement => {
 
   return (
     <>
-      {isLogged && (
+      {isLogged && !location.pathname.includes("/preview") && (
         <AppBar
           position="sticky"
           sx={{

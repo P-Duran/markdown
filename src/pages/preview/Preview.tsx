@@ -14,10 +14,10 @@ export const Preview = () => {
   );
 
   return (
-    <Box sx={{ display: "flex", width: "100%", p: 1 }}>
+    <Box sx={{ display: "flex", width: "100%", minHeight: "100vh" }}>
       <CssBaseline />
       <LateralMenu />
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, backgroundColor: "white", p: 1 }}>
         <MarkdownRender value={currentPage?.text ?? ""} delayMultiplier={0} />
       </Box>
     </Box>

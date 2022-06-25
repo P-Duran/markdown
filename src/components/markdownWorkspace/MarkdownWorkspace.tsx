@@ -2,7 +2,6 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import PreviewIcon from "@mui/icons-material/Preview";
 import {
-  alpha,
   Avatar,
   Box,
   Container,
@@ -62,10 +61,7 @@ export const MarkdownWorkspaceRender = ({ workspace, onDelete }: Props) => {
               onClick={(e) => {
                 e.stopPropagation();
                 navigate({
-                  pathname: Paths.PREVIEW.replace(
-                    ":markdownId",
-                    workspace._id
-                  ).replace(":pageId", "home"),
+                  pathname: Paths.PREVIEW + "/" + workspace._id,
                 });
               }}
             >

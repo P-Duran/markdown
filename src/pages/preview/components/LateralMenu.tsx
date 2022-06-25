@@ -1,8 +1,17 @@
 import * as Icons from "@mui/icons-material";
-import { Box, Drawer, List, ListItem, ListItemIcon } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { createElement, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMarkdownPages } from "src/hooks/useMarkdownPages";
+import { useMarkdownWorkspace } from "src/hooks/useMarkdownWorkspace";
 import { Paths } from "src/pages/paths";
 
 const drawerWidth = 250;
@@ -11,10 +20,15 @@ export const LateralMenu = () => {
   const navigate = useNavigate();
   const { markdownId, pageId } = useParams();
   const { pages } = useMarkdownPages(markdownId ?? "");
+  const { workspaces } = useMarkdownWorkspace();
 
   const selectedPage = useMemo(
     () => pages.find((page) => page._id === pageId)?._id ?? pages[0]?._id,
     [pageId, pages]
+  );
+
+  const currentMarkdownWorkspace = workspaces.find(
+    (ws) => ws._id === markdownId
   );
 
   return (
@@ -27,14 +41,17 @@ export const LateralMenu = () => {
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
-          marginTop: 9.5,
+          marginTop: 4,
           borderRadius: 2,
           backgroundColor: "transparent",
           border: "none",
         },
       }}
     >
-      <Box sx={{ overflow: "auto", px: 1 }}>
+      <Stack sx={{ overflow: "auto", px: 1 }} spacing={1}>
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Typography variant="h3">{currentMarkdownWorkspace?.name}</Typography>
+        </Box>
         <List>
           {pages.map((page) => {
             const isSelected = page._id === selectedPage;
@@ -44,10 +61,7 @@ export const LateralMenu = () => {
                 key={page._id}
                 onClick={() =>
                   navigate({
-                    pathname: Paths.PREVIEW.replace(
-                      ":markdownId",
-                      markdownId ?? ""
-                    ).replace(":pageId", page._id),
+                    pathname: Paths.PREVIEW + "/" + markdownId + "/" + page._id,
                   })
                 }
                 sx={{
@@ -67,7 +81,7 @@ export const LateralMenu = () => {
             );
           })}
         </List>
-      </Box>
+      </Stack>
     </Drawer>
   );
 };

@@ -1,9 +1,9 @@
 import { Grid } from "@mui/material";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Route, Routes } from "react-router-dom";
 import { HomeView } from "src/components/homeView/HomeView";
 import { NotFound } from "src/components/notFound/NotFound";
-import { LazyRoute } from "../LazyRoute";
+import { renderRoute } from "src/utils/RouteUtils";
 import { authRoutes } from "../routes";
 
 export const Auth = (): ReactElement => {
@@ -15,20 +15,13 @@ export const Auth = (): ReactElement => {
       }}
     >
       <HomeView />
-      <Grid item sm={6} sx={{ height: "100%", paddingTop: 5, backgroundColor: "white" }}>
+      <Grid
+        item
+        sm={6}
+        sx={{ height: "100%", paddingTop: 5, backgroundColor: "white" }}
+      >
         <Routes>
-          {authRoutes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={
-                <LazyRoute
-                  componentPath={route.componentPath}
-                  componentName={route.component}
-                />
-              }
-            />
-          ))}
+          {authRoutes.map((route) => renderRoute(route))}
           {/* TODO: Not Found Page */}
           <Route path="*" element={<NotFound />} />
         </Routes>
